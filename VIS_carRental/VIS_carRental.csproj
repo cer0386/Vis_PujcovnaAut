@@ -96,6 +96,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="VyraditAuto.resx">
+      <DependentUpon>VyraditAuto.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Zakaznik.resx">
       <DependentUpon>Zakaznik.cs</DependentUpon>
     </EmbeddedResource>
