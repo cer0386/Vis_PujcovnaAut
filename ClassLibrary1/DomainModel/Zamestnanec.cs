@@ -14,6 +14,29 @@ namespace ClassLibrary1
         public string Pozice { get; set; }
         public string Email { get; set; }
 
+        public Boolean isManager()
+        {
+            return true;
+        }
+        public void vytvorZakaznika()
+        {
+
+        }
+        public void vytvorZamestnance()
+        {
+
+        }
+        public void vytvorRezervaci()
+        {
+
+        }
+        public Rezervace getRezervace()
+        {
+            Rezervace r = new Rezervace();
+            return r;
+        }
+
+
 
     }
 }

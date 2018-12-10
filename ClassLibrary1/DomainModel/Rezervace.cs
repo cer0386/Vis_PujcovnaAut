@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary1
 {
-    class Rezervace
+    public class Rezervace
     {
+        public int id_rezervace { get; set; }
+        public DateTime zacatekRezervace { get; set; }
+        public DateTime konecRezervace { get; set; }
+        public List<Auto> auta { get; set; }
+
+
+
+        private void vystavFakturu()
+        {
+
+        }
+
     }
 }

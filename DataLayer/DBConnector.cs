@@ -14,7 +14,7 @@ namespace DataLayer
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
             builder.DataSource = @"dbsys.cs.vsb.cz\STUDENT";   // update me
             builder.UserID = "cer086";              // update me
-            builder.Password = "0395Ad2bd3";      // update me
+            builder.Password = "a7kcp7WdCu";      // update me
             builder.InitialCatalog = "cer0386";
             return builder;
         }

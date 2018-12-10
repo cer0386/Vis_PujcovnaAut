@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary1
 {
-    class Platba
+    public class Platba
     {
+        public int id_platby { get; set; }
+        public String typ_platby { get; set; }
+        public double castka { get; set; }
     }
 }

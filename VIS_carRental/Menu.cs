@@ -32,7 +32,7 @@ namespace VIS_carRental
 
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void Button4_Click(object sender, EventArgs e)
         {
 
         }

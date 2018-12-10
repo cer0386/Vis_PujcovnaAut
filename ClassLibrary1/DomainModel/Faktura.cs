@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary1
 {
-    class Faktura
+    public class Faktura
     {
+        public int id_faktury { get; set; }
+        public DateTime vytvorena { get; set; }
+        public DateTime potvrzena { get; set; }
+        public DateTime zaplacena { get; set; }
     }
 }
