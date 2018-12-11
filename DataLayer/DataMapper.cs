@@ -452,9 +452,10 @@ namespace DataLayer
         {
             Faktura faktura = new Faktura();
             faktura.cisloFaktury = reader.GetInt32(0);
-            faktura.vytvorena = reader.GetDateTime(1);
-            faktura.potvrzena = reader.GetDateTime(2);
-            faktura.zaplacena = reader.GetDateTime(3);
+            faktura.cisloRezervace = reader.GetInt32(1);
+            faktura.vytvorena = reader.GetDateTime(2);
+            faktura.potvrzena = reader.GetDateTime(3);
+            faktura.zaplacena = reader.GetDateTime(4);
             return faktura;
         }
 
@@ -462,8 +463,9 @@ namespace DataLayer
         {
             Platba platba = new Platba();
             platba.id_platby = reader.GetInt32(0);
-            platba.typ_platby = reader.GetString(1);
-            platba.castka = reader.GetDouble(2);
+            platba.cisloFaktury = reader.GetInt32(1);
+            platba.typ_platby = reader.GetString(2);
+            platba.castka = reader.GetDouble(3v);
             return platba;
         }
 
@@ -471,8 +473,9 @@ namespace DataLayer
         {
             Rezervace rezervace = new Rezervace();
             rezervace.cisloRezervace = reader.GetInt32(0);
-            rezervace.zacatekRezervace = reader.GetDateTime(1);
-            rezervace.konecRezervace = reader.GetDateTime(2);
+            rezervace.idZakaznika = reader.GetInt32(1);
+            rezervace.zacatekRezervace = reader.GetDateTime(2);
+            rezervace.konecRezervace = reader.GetDateTime(3);
             
             return rezervace;
         }
