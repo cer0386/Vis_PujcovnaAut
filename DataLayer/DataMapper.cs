@@ -1,13 +1,16 @@
-﻿using ClassLibrary1;
-using ClassLibrary1.DomainModel;
+﻿using DomainLayer;
+using DomainLayer.DomainModel;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Text;
 
 namespace DataLayer
 {
+    //autoIncrement id u novych zams and zaks
+    //selects
     public class DataMapper
     {
-        public List<Zakaznik> Find()
+        public List<Zakaznik> FindZak()
         {
             string sql = ("Select * from vis.Zakaznik");
             List<Zakaznik> zakaznici = new List<Zakaznik>();
@@ -28,7 +31,7 @@ namespace DataLayer
             return zakaznici;
         }
 
-        public Zakaznik Find(int id)
+        public Zakaznik FindZak(int id)
         {
             string sql = ("Select * from vis.Zakaznik where id = @id");
             Zakaznik zakaznik = null;
@@ -50,7 +53,7 @@ namespace DataLayer
             return zakaznik;
         }
 
-        public Zakaznik Find(string jmeno, string prijmeni, string ridicak)
+        public Zakaznik FindZak(string jmeno, string prijmeni, string ridicak)
         {
             string sql = ("Select * from vis.Zakaznik where");
             Zakaznik zakaznik = null;
@@ -78,13 +81,343 @@ namespace DataLayer
         }
         
 
-        public int Save()
+        public int SaveZak(Zakaznik zakaznik)
         {
+            SqlConnectionStringBuilder builder = DBConnector.GetBuilder();
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+            {
+                connection.Open();
+                StringBuilder sb = new StringBuilder();
+                sb.Clear();
+                sb.Append("INSERT INTO vis.zakaznik (id_zakaznika,jmeno,prijmeni,mesto, ulice, cislo_popisne, psc, email, cislo_ridicskeho_prukazu)");
+                sb.Append("VALUES (@id_zakaznika, @jmeno, @prijmeni, @mesto, @ulice,@cislo_popisne,@psc,@email,@cislo_ridicskeho_prukazu);");
+                //sb.Append("SELECT CAST(scope_identity() AS int)");
+                string sql = sb.ToString();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@id_zakaznika", zakaznik.ID);
+                    command.Parameters.AddWithValue("@jmeno", zakaznik.Jmeno);
+                    command.Parameters.AddWithValue("@prijmeni", zakaznik.Prijmeni);
+                    command.Parameters.AddWithValue("@mesto", zakaznik.Mesto);
+                    command.Parameters.AddWithValue("@ulice", zakaznik.Ulice);
+                    command.Parameters.AddWithValue("@cislo_popisne", zakaznik.CisloPopisne);
+                    command.Parameters.AddWithValue("@psc", zakaznik.PSC);
+                    command.Parameters.AddWithValue("@email", zakaznik.Email);
+                    command.Parameters.AddWithValue("@cislo_ridicskeho_prukazu", zakaznik.cisloRidicskehoPrukazu);
+                }
+            }
             return 0;
         }
-
-        public int Delete()
+        public int DeleteZak(Zakaznik zakaznik)
         {
+            SqlConnectionStringBuilder builder = DBConnector.GetBuilder();
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+            {
+                connection.Open();
+                StringBuilder sb = new StringBuilder();
+                sb.Clear();
+                sb.Append("DELETE FROM vis.zakaznik where id_zakaznika = @id");
+                string sql = sb.ToString();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@id", zakaznik.ID);
+
+                }
+            }
+
+            return 0;
+        }
+        public int SaveZam(Zamestnanec zamestnanec)
+        {
+            SqlConnectionStringBuilder builder = DBConnector.GetBuilder();
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+            {
+                connection.Open();
+                StringBuilder sb = new StringBuilder();
+                sb.Clear();
+                sb.Append("INSERT INTO vis.zamestnanec (id_zamestnance,jmeno,prijmeni,email, pozice)");
+                sb.Append("VALUES (@id, @jmeno, @prijmeni,@email,@pozice);");
+                //sb.Append("SELECT CAST(scope_identity() AS int)");
+                string sql = sb.ToString();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@id", zamestnanec.ID);
+                    command.Parameters.AddWithValue("@jmeno", zamestnanec.Jmeno);
+                    command.Parameters.AddWithValue("@prijmeni", zamestnanec.Prijmeni);
+                    command.Parameters.AddWithValue("@email", zamestnanec.Email);
+                    command.Parameters.AddWithValue("@pozice", zamestnanec.Pozice);
+                }
+            }
+
+            return 0;
+        }
+        public int DeleteZam(Zamestnanec zamestnanec)
+        {
+            SqlConnectionStringBuilder builder = DBConnector.GetBuilder();
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+            {
+                connection.Open();
+                StringBuilder sb = new StringBuilder();
+                sb.Clear();
+                sb.Append("DELETE FROM vis.zamestnanec where id_zamestnance = @id");
+                string sql = sb.ToString();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@id", zamestnanec.ID);
+
+                }
+            }
+            return 0;
+        }
+        public int SaveAuto(Auto auto)
+        {
+            SqlConnectionStringBuilder builder = DBConnector.GetBuilder();
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+            {
+                connection.Open();
+                StringBuilder sb = new StringBuilder();
+                sb.Clear();
+                sb.Append("INSERT INTO vis.auto (spz,zakoupeno,stk,typ, znacka, pocet_nehod, cena_za_den, vyrazeno  )");
+                sb.Append("VALUES (@spz, @zakoupeno, @stk, @typ, @znacka,@pocet_nehod,@cena_za_den,@vyrazeno);");
+                //sb.Append("SELECT CAST(scope_identity() AS int)");
+                string sql = sb.ToString();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@spz", auto.SPZ);
+                    command.Parameters.AddWithValue("@zakoupeno", auto.datumZakoupeni);
+                    command.Parameters.AddWithValue("@stk", auto.STK);
+                    command.Parameters.AddWithValue("@typ", auto.typ);
+                    command.Parameters.AddWithValue("@znacka", auto.znacka);
+                    command.Parameters.AddWithValue("@pocet_nehod", auto.pocetNehod);
+                    command.Parameters.AddWithValue("@cena_za_den", auto.cenaZaDen);
+                    command.Parameters.AddWithValue("@vyrazeno", auto.vyrazeno);
+                }
+            }
+            return 0;
+        }
+        public int DeleteAuto(Auto auto)
+        {
+            SqlConnectionStringBuilder builder = DBConnector.GetBuilder();
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+            {
+                connection.Open();
+                StringBuilder sb = new StringBuilder();
+                sb.Clear();
+                sb.Append("DELETE FROM vis.auto where SPZ = @spz");
+                string sql = sb.ToString();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@spz", auto.SPZ);
+
+                }
+            }
+            return 0;
+        }
+        public int SaveFak(Faktura faktura)
+        {
+            SqlConnectionStringBuilder builder = DBConnector.GetBuilder();
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+            {
+                connection.Open();
+                StringBuilder sb = new StringBuilder();
+                sb.Clear();
+                sb.Append("INSERT INTO vis.faktura (cislo_faktury,cislo_rezervace,vytvoreno,potvrzeno, zaplaceno)");
+                sb.Append("VALUES (@cisloF, @cisloR, @vytvoreno, @potvrzeno, @zaplaceno);");
+                //sb.Append("SELECT CAST(scope_identity() AS int)");
+                string sql = sb.ToString();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@cisloF", faktura.cisloFaktury);
+                    command.Parameters.AddWithValue("@cisloR", faktura.cisloRezervace);
+                    command.Parameters.AddWithValue("@vytvoreno", faktura.vytvorena);
+                    command.Parameters.AddWithValue("@potvrzeno", faktura.potvrzena);
+                    command.Parameters.AddWithValue("@zaplaceno", faktura.zaplacena);
+                }
+            }
+
+
+            return 0;
+        }
+        public int DeleteFak(Faktura faktura)
+        {
+            SqlConnectionStringBuilder builder = DBConnector.GetBuilder();
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+            {
+                connection.Open();
+                StringBuilder sb = new StringBuilder();
+                sb.Clear();
+                sb.Append("DELETE FROM vis.faktura where cislo_faktury = @id");
+                string sql = sb.ToString();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@id", faktura.cisloFaktury);
+
+                }
+            }
+            return 0;
+        }
+        public int SavePlat(Platba platba)
+        {
+            SqlConnectionStringBuilder builder = DBConnector.GetBuilder();
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+            {
+                connection.Open();
+                StringBuilder sb = new StringBuilder();
+                sb.Clear();
+                sb.Append("INSERT INTO vis.platba (id_platba,cislo_faktury,typ_platby,castka)");
+                sb.Append("VALUES (@id, @cisloF, @typ_platby, @castka);");
+                //sb.Append("SELECT CAST(scope_identity() AS int)");
+                string sql = sb.ToString();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@id", platba.id_platby);
+                    command.Parameters.AddWithValue("@cisloF", platba.cisloFaktury);
+                    command.Parameters.AddWithValue("@typ_platby", platba.typ_platby);
+                    command.Parameters.AddWithValue("@castka", platba.castka);
+                }
+            }
+
+
+            return 0;
+        }
+        public int DeletePlat(Platba platba)
+        {
+            SqlConnectionStringBuilder builder = DBConnector.GetBuilder();
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+            {
+                connection.Open();
+                StringBuilder sb = new StringBuilder();
+                sb.Clear();
+                sb.Append("DELETE FROM vis.platba where id_platba = @id");
+                string sql = sb.ToString();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@id", platba.id_platby);
+
+                }
+            }
+            return 0;
+        }
+        public int SaveRez(Rezervace rezervace)
+        {
+            SqlConnectionStringBuilder builder = DBConnector.GetBuilder();
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+            {
+                connection.Open();
+                StringBuilder sb = new StringBuilder();
+                sb.Clear();
+                sb.Append("INSERT INTO vis.rezervace (cislo_rezervace,id_zakaznika,vyzvednuti,vraceni)");
+                sb.Append("VALUES (@id_rezervace, @idZ, @vyzvednuti, @vraceni);");
+                //sb.Append("SELECT CAST(scope_identity() AS int)");
+                string sql = sb.ToString();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@id_rezervace", rezervace.cisloRezervace);
+                    command.Parameters.AddWithValue("@idZ", rezervace.idZakaznika);
+                    command.Parameters.AddWithValue("@vyzvednuti", rezervace.zacatekRezervace);
+                    command.Parameters.AddWithValue("@vraceni", rezervace.konecRezervace);
+                }
+            }
+
+
+            return 0;
+        }
+        public int DeleteRez(Rezervace rezervace)
+        {
+            SqlConnectionStringBuilder builder = DBConnector.GetBuilder();
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+            {
+                connection.Open();
+                StringBuilder sb = new StringBuilder();
+                sb.Clear();
+                sb.Append("DELETE FROM vis.rezervace where cislo_rezervace = @id");
+                string sql = sb.ToString();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@id", rezervace.cisloRezervace);
+
+                }
+            }
+            return 0;
+        }
+        public int SaveRezervovano(Rezervovano rezervovano)
+        {
+            SqlConnectionStringBuilder builder = DBConnector.GetBuilder();
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+            {
+                connection.Open();
+                StringBuilder sb = new StringBuilder();
+                sb.Clear();
+                sb.Append("INSERT INTO vis.rezervovano (cislo_rezervace,auto_spz)");
+                sb.Append("VALUES (@cisloR, @spz);");
+                //sb.Append("SELECT CAST(scope_identity() AS int)");
+                string sql = sb.ToString();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@cisloR", rezervovano.cisloRezervace);
+                    command.Parameters.AddWithValue("@spz", rezervovano.SPZ);
+                }
+            }
+
+
+            return 0;
+        }
+        public int DeleteRezervovano(Rezervovano rezervovano)
+        {
+            SqlConnectionStringBuilder builder = DBConnector.GetBuilder();
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+            {
+                connection.Open();
+                StringBuilder sb = new StringBuilder();
+                sb.Clear();
+                sb.Append("DELETE FROM vis.rezervovano where auto_spz = @spz");
+                string sql = sb.ToString();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@spz", rezervovano.SPZ);
+
+                }
+            }
+            return 0;
+        }
+        public int SaveUprav(Upravuje upravuje)
+        {
+            SqlConnectionStringBuilder builder = DBConnector.GetBuilder();
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+            {
+                connection.Open();
+                StringBuilder sb = new StringBuilder();
+                sb.Clear();
+                sb.Append("INSERT INTO vis.upravuje (ID_zamestnance,Cislo_Rezervace,)");
+                sb.Append("VALUES (@idZam, @cisloR);");
+                //sb.Append("SELECT CAST(scope_identity() AS int)");
+                string sql = sb.ToString();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@idZam", upravuje.IDzamestnance);
+                    command.Parameters.AddWithValue("@cisloR", upravuje.cisloRezervace);
+                }
+            }
+
+
+            return 0;
+        }
+        public int DeleteUprav(Upravuje upravuje)
+        {
+            SqlConnectionStringBuilder builder = DBConnector.GetBuilder();
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+            {
+                connection.Open();
+                StringBuilder sb = new StringBuilder();
+                sb.Clear();
+                sb.Append("DELETE FROM vis.upravuje where ID_zamestnance = @id");
+                string sql = sb.ToString();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@id", upravuje.IDzamestnance);
+
+                }
+            }
             return 0;
         }
 
@@ -118,7 +451,7 @@ namespace DataLayer
         private static Faktura MapFakToObj(SqlDataReader reader)
         {
             Faktura faktura = new Faktura();
-            faktura.id_faktury = reader.GetInt32(0);
+            faktura.cisloFaktury = reader.GetInt32(0);
             faktura.vytvorena = reader.GetDateTime(1);
             faktura.potvrzena = reader.GetDateTime(2);
             faktura.zaplacena = reader.GetDateTime(3);
@@ -137,7 +470,7 @@ namespace DataLayer
         private static Rezervace MapRezToObj(SqlDataReader reader)
         {
             Rezervace rezervace = new Rezervace();
-            rezervace.id_rezervace = reader.GetInt32(0);
+            rezervace.cisloRezervace = reader.GetInt32(0);
             rezervace.zacatekRezervace = reader.GetDateTime(1);
             rezervace.konecRezervace = reader.GetDateTime(2);
             

@@ -7,8 +7,8 @@
     <ProjectGuid>{8F83D0B9-426A-42FE-9B87-CE0B176E1149}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ClassLibrary1</RootNamespace>
-    <AssemblyName>ClassLibrary1</AssemblyName>
+    <RootNamespace>DomainLayer</RootNamespace>
+    <AssemblyName>DomainLayer</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
