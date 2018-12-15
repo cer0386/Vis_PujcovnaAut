@@ -52,43 +52,50 @@
             this.button10 = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.listBox2 = new System.Windows.Forms.ListBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.autaNaRez = new System.Windows.Forms.DataGridView();
+            this.infoOZak = new System.Windows.Forms.ListBox();
+            this.listZaks = new System.Windows.Forms.ListBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
-            this.label9 = new System.Windows.Forms.Label();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
-            this.label10 = new System.Windows.Forms.Label();
+            this.ridicakText = new System.Windows.Forms.TextBox();
             this.button11 = new System.Windows.Forms.Button();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.zakInfoR = new System.Windows.Forms.DataGridView();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.prijmeniText = new System.Windows.Forms.TextBox();
+            this.jmenoText = new System.Windows.Forms.TextBox();
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button5 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.rezervaceDgv = new System.Windows.Forms.DataGridView();
             this.VyhledatRezervaci = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.NovaRezervace = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.label9 = new System.Windows.Forms.Label();
+            this.ridicak = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.prijmeni = new System.Windows.Forms.TextBox();
+            this.jmeno = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.spz = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.znacka = new System.Windows.Forms.TextBox();
+            this.typ = new System.Windows.Forms.TextBox();
+            this.autaDvg = new System.Windows.Forms.DataGridView();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.autaNaRez)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zakInfoR)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rezervaceDgv)).BeginInit();
             this.tabControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.autaDvg)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPage5
@@ -117,7 +124,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(705, 395);
+            this.tabPage5.Size = new System.Drawing.Size(1436, 518);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Auta";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -256,7 +263,7 @@
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 24;
-            this.dataGridView2.Size = new System.Drawing.Size(526, 388);
+            this.dataGridView2.Size = new System.Drawing.Size(923, 388);
             this.dataGridView2.TabIndex = 19;
             this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
@@ -350,28 +357,24 @@
             this.tabPage4.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage4.Size = new System.Drawing.Size(705, 395);
+            this.tabPage4.Size = new System.Drawing.Size(1436, 518);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Zaměstnanci";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.listBox2);
-            this.tabPage3.Controls.Add(this.listBox1);
+            this.tabPage3.Controls.Add(this.autaNaRez);
+            this.tabPage3.Controls.Add(this.infoOZak);
+            this.tabPage3.Controls.Add(this.listZaks);
             this.tabPage3.Controls.Add(this.label8);
-            this.tabPage3.Controls.Add(this.textBox6);
-            this.tabPage3.Controls.Add(this.dateTimePicker3);
-            this.tabPage3.Controls.Add(this.label9);
-            this.tabPage3.Controls.Add(this.checkBox4);
-            this.tabPage3.Controls.Add(this.dateTimePicker4);
-            this.tabPage3.Controls.Add(this.label10);
+            this.tabPage3.Controls.Add(this.ridicakText);
             this.tabPage3.Controls.Add(this.button11);
-            this.tabPage3.Controls.Add(this.dataGridView3);
+            this.tabPage3.Controls.Add(this.zakInfoR);
             this.tabPage3.Controls.Add(this.label11);
             this.tabPage3.Controls.Add(this.label12);
-            this.tabPage3.Controls.Add(this.textBox7);
-            this.tabPage3.Controls.Add(this.textBox8);
+            this.tabPage3.Controls.Add(this.prijmeniText);
+            this.tabPage3.Controls.Add(this.jmenoText);
             this.tabPage3.Controls.Add(this.button12);
             this.tabPage3.Controls.Add(this.button13);
             this.tabPage3.Controls.Add(this.button15);
@@ -379,37 +382,39 @@
             this.tabPage3.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage3.Size = new System.Drawing.Size(705, 395);
+            this.tabPage3.Size = new System.Drawing.Size(1436, 518);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Zákazníci";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // listBox2
+            // autaNaRez
             // 
-            this.listBox2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Items.AddRange(new object[] {
-            "Zakaznik2 - info o rezervacích "});
-            this.listBox2.Location = new System.Drawing.Point(178, 5);
-            this.listBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(376, 394);
-            this.listBox2.TabIndex = 58;
+            this.autaNaRez.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.autaNaRez.Location = new System.Drawing.Point(644, 4);
+            this.autaNaRez.Margin = new System.Windows.Forms.Padding(2);
+            this.autaNaRez.Name = "autaNaRez";
+            this.autaNaRez.RowTemplate.Height = 24;
+            this.autaNaRez.Size = new System.Drawing.Size(441, 510);
+            this.autaNaRez.TabIndex = 59;
             // 
-            // listBox1
+            // infoOZak
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Items.AddRange(new object[] {
-            "Zakaznik1",
-            "Zakaznik2",
-            "Zakaznik3",
-            "Zakaznik4"});
-            this.listBox1.Location = new System.Drawing.Point(558, 5);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(143, 394);
-            this.listBox1.TabIndex = 57;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.infoOZak.FormattingEnabled = true;
+            this.infoOZak.Location = new System.Drawing.Point(1089, 7);
+            this.infoOZak.Margin = new System.Windows.Forms.Padding(2);
+            this.infoOZak.Name = "infoOZak";
+            this.infoOZak.Size = new System.Drawing.Size(196, 511);
+            this.infoOZak.TabIndex = 58;
+            // 
+            // listZaks
+            // 
+            this.listZaks.FormattingEnabled = true;
+            this.listZaks.Location = new System.Drawing.Point(1289, 7);
+            this.listZaks.Margin = new System.Windows.Forms.Padding(2);
+            this.listZaks.Name = "listZaks";
+            this.listZaks.Size = new System.Drawing.Size(143, 511);
+            this.listZaks.TabIndex = 57;
+            this.listZaks.SelectedIndexChanged += new System.EventHandler(this.ListBox1_SelectedIndexChanged);
             // 
             // label8
             // 
@@ -421,61 +426,13 @@
             this.label8.TabIndex = 56;
             this.label8.Text = "Číslo řidičského průkazu";
             // 
-            // textBox6
+            // ridicakText
             // 
-            this.textBox6.Location = new System.Drawing.Point(6, 65);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(168, 20);
-            this.textBox6.TabIndex = 55;
-            // 
-            // dateTimePicker3
-            // 
-            this.dateTimePicker3.Location = new System.Drawing.Point(6, 162);
-            this.dateTimePicker3.Margin = new System.Windows.Forms.Padding(2);
-            this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.Size = new System.Drawing.Size(151, 20);
-            this.dateTimePicker3.TabIndex = 54;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(4, 145);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(23, 13);
-            this.label9.TabIndex = 53;
-            this.label9.Text = "DO";
-            // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(6, 89);
-            this.checkBox4.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(136, 17);
-            this.checkBox4.TabIndex = 52;
-            this.checkBox4.Text = "Zadat datum zapůjčení";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            // 
-            // dateTimePicker4
-            // 
-            this.dateTimePicker4.Location = new System.Drawing.Point(6, 125);
-            this.dateTimePicker4.Margin = new System.Windows.Forms.Padding(2);
-            this.dateTimePicker4.Name = "dateTimePicker4";
-            this.dateTimePicker4.Size = new System.Drawing.Size(151, 20);
-            this.dateTimePicker4.TabIndex = 50;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(4, 109);
-            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(23, 13);
-            this.label10.TabIndex = 49;
-            this.label10.Text = "OD";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
+            this.ridicakText.Location = new System.Drawing.Point(6, 65);
+            this.ridicakText.Margin = new System.Windows.Forms.Padding(2);
+            this.ridicakText.Name = "ridicakText";
+            this.ridicakText.Size = new System.Drawing.Size(168, 20);
+            this.ridicakText.TabIndex = 55;
             // 
             // button11
             // 
@@ -487,15 +444,16 @@
             this.button11.Text = "Smazat zákazníka";
             this.button11.UseVisualStyleBackColor = true;
             // 
-            // dataGridView3
+            // zakInfoR
             // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(177, 3);
-            this.dataGridView3.Margin = new System.Windows.Forms.Padding(2);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.RowTemplate.Height = 24;
-            this.dataGridView3.Size = new System.Drawing.Size(524, 388);
-            this.dataGridView3.TabIndex = 47;
+            this.zakInfoR.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.zakInfoR.Location = new System.Drawing.Point(189, 4);
+            this.zakInfoR.Margin = new System.Windows.Forms.Padding(2);
+            this.zakInfoR.Name = "zakInfoR";
+            this.zakInfoR.RowTemplate.Height = 24;
+            this.zakInfoR.Size = new System.Drawing.Size(438, 510);
+            this.zakInfoR.TabIndex = 47;
+            this.zakInfoR.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ZakInfoR_CellClick);
             // 
             // label11
             // 
@@ -518,21 +476,22 @@
             this.label12.TabIndex = 45;
             this.label12.Text = "Příjmení";
             // 
-            // textBox7
+            // prijmeniText
             // 
-            this.textBox7.Location = new System.Drawing.Point(54, 26);
-            this.textBox7.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(120, 20);
-            this.textBox7.TabIndex = 44;
+            this.prijmeniText.Location = new System.Drawing.Point(54, 26);
+            this.prijmeniText.Margin = new System.Windows.Forms.Padding(2);
+            this.prijmeniText.Name = "prijmeniText";
+            this.prijmeniText.Size = new System.Drawing.Size(120, 20);
+            this.prijmeniText.TabIndex = 44;
             // 
-            // textBox8
+            // jmenoText
             // 
-            this.textBox8.Location = new System.Drawing.Point(54, 3);
-            this.textBox8.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(120, 20);
-            this.textBox8.TabIndex = 43;
+            this.jmenoText.Location = new System.Drawing.Point(54, 3);
+            this.jmenoText.Margin = new System.Windows.Forms.Padding(2);
+            this.jmenoText.Name = "jmenoText";
+            this.jmenoText.Size = new System.Drawing.Size(120, 20);
+            this.jmenoText.TabIndex = 43;
+            this.jmenoText.TextChanged += new System.EventHandler(this.textBox8_TextChanged);
             // 
             // button12
             // 
@@ -543,6 +502,7 @@
             this.button12.TabIndex = 42;
             this.button12.Text = "Vyhledat";
             this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.Button12_Click);
             // 
             // button13
             // 
@@ -566,12 +526,21 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.button5);
-            this.tabPage2.Controls.Add(this.dataGridView1);
-            this.tabPage2.Controls.Add(this.label2);
+            this.tabPage2.Controls.Add(this.autaDvg);
             this.tabPage2.Controls.Add(this.label1);
-            this.tabPage2.Controls.Add(this.textBox2);
-            this.tabPage2.Controls.Add(this.textBox1);
+            this.tabPage2.Controls.Add(this.spz);
+            this.tabPage2.Controls.Add(this.label2);
+            this.tabPage2.Controls.Add(this.label14);
+            this.tabPage2.Controls.Add(this.znacka);
+            this.tabPage2.Controls.Add(this.typ);
+            this.tabPage2.Controls.Add(this.label9);
+            this.tabPage2.Controls.Add(this.ridicak);
+            this.tabPage2.Controls.Add(this.label10);
+            this.tabPage2.Controls.Add(this.label13);
+            this.tabPage2.Controls.Add(this.prijmeni);
+            this.tabPage2.Controls.Add(this.jmeno);
+            this.tabPage2.Controls.Add(this.button5);
+            this.tabPage2.Controls.Add(this.rezervaceDgv);
             this.tabPage2.Controls.Add(this.VyhledatRezervaci);
             this.tabPage2.Controls.Add(this.button3);
             this.tabPage2.Controls.Add(this.button2);
@@ -580,14 +549,14 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage2.Size = new System.Drawing.Size(705, 395);
+            this.tabPage2.Size = new System.Drawing.Size(1436, 518);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Rezervace";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(2, 335);
+            this.button5.Location = new System.Drawing.Point(4, 454);
             this.button5.Margin = new System.Windows.Forms.Padding(2);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(170, 58);
@@ -596,56 +565,19 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click_1);
             // 
-            // dataGridView1
+            // rezervaceDgv
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(176, 5);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(526, 388);
-            this.dataGridView1.TabIndex = 9;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(4, 41);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(62, 13);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Název auta";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 5);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Jméno zákazníka";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(4, 58);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(168, 20);
-            this.textBox2.TabIndex = 5;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(4, 21);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(168, 20);
-            this.textBox1.TabIndex = 4;
+            this.rezervaceDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.rezervaceDgv.Location = new System.Drawing.Point(178, 0);
+            this.rezervaceDgv.Margin = new System.Windows.Forms.Padding(2);
+            this.rezervaceDgv.Name = "rezervaceDgv";
+            this.rezervaceDgv.RowTemplate.Height = 24;
+            this.rezervaceDgv.Size = new System.Drawing.Size(526, 518);
+            this.rezervaceDgv.TabIndex = 9;
             // 
             // VyhledatRezervaci
             // 
-            this.VyhledatRezervaci.Location = new System.Drawing.Point(4, 80);
+            this.VyhledatRezervaci.Location = new System.Drawing.Point(4, 214);
             this.VyhledatRezervaci.Margin = new System.Windows.Forms.Padding(2);
             this.VyhledatRezervaci.Name = "VyhledatRezervaci";
             this.VyhledatRezervaci.Size = new System.Drawing.Size(167, 25);
@@ -656,7 +588,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(2, 249);
+            this.button3.Location = new System.Drawing.Point(4, 368);
             this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(170, 58);
@@ -667,7 +599,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(2, 186);
+            this.button2.Location = new System.Drawing.Point(4, 305);
             this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(170, 58);
@@ -678,7 +610,7 @@
             // 
             // NovaRezervace
             // 
-            this.NovaRezervace.Location = new System.Drawing.Point(2, 124);
+            this.NovaRezervace.Location = new System.Drawing.Point(4, 243);
             this.NovaRezervace.Margin = new System.Windows.Forms.Padding(2);
             this.NovaRezervace.Name = "NovaRezervace";
             this.NovaRezervace.Size = new System.Drawing.Size(170, 58);
@@ -697,14 +629,138 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(713, 421);
+            this.tabControl1.Size = new System.Drawing.Size(1444, 544);
             this.tabControl1.TabIndex = 0;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(4, 52);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(124, 13);
+            this.label9.TabIndex = 62;
+            this.label9.Text = "Číslo řidičského průkazu";
+            // 
+            // ridicak
+            // 
+            this.ridicak.Location = new System.Drawing.Point(6, 67);
+            this.ridicak.Margin = new System.Windows.Forms.Padding(2);
+            this.ridicak.Name = "ridicak";
+            this.ridicak.Size = new System.Drawing.Size(168, 20);
+            this.ridicak.TabIndex = 61;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(3, 5);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(38, 13);
+            this.label10.TabIndex = 60;
+            this.label10.Text = "Jméno";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(2, 28);
+            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(48, 13);
+            this.label13.TabIndex = 59;
+            this.label13.Text = "Příjmení";
+            // 
+            // prijmeni
+            // 
+            this.prijmeni.Location = new System.Drawing.Point(54, 28);
+            this.prijmeni.Margin = new System.Windows.Forms.Padding(2);
+            this.prijmeni.Name = "prijmeni";
+            this.prijmeni.Size = new System.Drawing.Size(120, 20);
+            this.prijmeni.TabIndex = 58;
+            // 
+            // jmeno
+            // 
+            this.jmeno.Location = new System.Drawing.Point(54, 5);
+            this.jmeno.Margin = new System.Windows.Forms.Padding(2);
+            this.jmeno.Name = "jmeno";
+            this.jmeno.Size = new System.Drawing.Size(120, 20);
+            this.jmeno.TabIndex = 57;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(4, 138);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(28, 13);
+            this.label1.TabIndex = 68;
+            this.label1.Text = "SPZ";
+            this.label1.Click += new System.EventHandler(this.label1_Click_1);
+            // 
+            // spz
+            // 
+            this.spz.Location = new System.Drawing.Point(6, 153);
+            this.spz.Margin = new System.Windows.Forms.Padding(2);
+            this.spz.Name = "spz";
+            this.spz.Size = new System.Drawing.Size(168, 20);
+            this.spz.TabIndex = 67;
+            this.spz.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 91);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(25, 13);
+            this.label2.TabIndex = 66;
+            this.label2.Text = "Typ";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(2, 114);
+            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(44, 13);
+            this.label14.TabIndex = 65;
+            this.label14.Text = "Značka";
+            this.label14.Click += new System.EventHandler(this.label14_Click);
+            // 
+            // znacka
+            // 
+            this.znacka.Location = new System.Drawing.Point(54, 114);
+            this.znacka.Margin = new System.Windows.Forms.Padding(2);
+            this.znacka.Name = "znacka";
+            this.znacka.Size = new System.Drawing.Size(120, 20);
+            this.znacka.TabIndex = 64;
+            this.znacka.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            // 
+            // typ
+            // 
+            this.typ.Location = new System.Drawing.Point(54, 91);
+            this.typ.Margin = new System.Windows.Forms.Padding(2);
+            this.typ.Name = "typ";
+            this.typ.Size = new System.Drawing.Size(120, 20);
+            this.typ.TabIndex = 63;
+            this.typ.TextChanged += new System.EventHandler(this.textBox9_TextChanged);
+            // 
+            // autaDvg
+            // 
+            this.autaDvg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.autaDvg.Location = new System.Drawing.Point(724, 2);
+            this.autaDvg.Margin = new System.Windows.Forms.Padding(2);
+            this.autaDvg.Name = "autaDvg";
+            this.autaDvg.RowTemplate.Height = 24;
+            this.autaDvg.Size = new System.Drawing.Size(708, 510);
+            this.autaDvg.TabIndex = 69;
             // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(737, 440);
+            this.ClientSize = new System.Drawing.Size(1464, 565);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Menu";
@@ -715,11 +771,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.autaNaRez)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zakInfoR)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rezervaceDgv)).EndInit();
             this.tabControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.autaDvg)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -735,12 +793,8 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button NovaRezervace;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView rezervaceDgv;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Label label3;
@@ -762,23 +816,32 @@
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker3;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.DateTimePicker dateTimePicker4;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.DataGridView zakInfoR;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox prijmeniText;
+        private System.Windows.Forms.TextBox jmenoText;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.TextBox ridicakText;
+        private System.Windows.Forms.ListBox listZaks;
+        private System.Windows.Forms.ListBox infoOZak;
+        private System.Windows.Forms.DataGridView autaNaRez;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox spz;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox znacka;
+        private System.Windows.Forms.TextBox typ;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox ridicak;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox prijmeni;
+        private System.Windows.Forms.TextBox jmeno;
+        private System.Windows.Forms.DataGridView autaDvg;
     }
 }

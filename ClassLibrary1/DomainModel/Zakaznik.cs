@@ -18,5 +18,25 @@ namespace DomainLayer
         public string Email { get; set; }
         public string cisloRidicskehoPrukazu { get; set; }
 
+
+        public Zakaznik()
+        {
+
+        }
+        public Zakaznik(int id, string j, string p, string m, string u, int cp, int psc, string em, string rid)
+        {
+            this.ID = id;
+            this.Jmeno = j;
+            this.Prijmeni = p;
+            this.Mesto = m;
+            this.Ulice = u;
+            this.CisloPopisne = cp;
+            this.PSC = psc;
+            this.Email = em;
+            this.cisloRidicskehoPrukazu = rid;
+        }
+
+
+
     }
 }

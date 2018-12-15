@@ -1,5 +1,6 @@
 ﻿using DomainLayer;
 using DomainLayer.DomainModel;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
@@ -53,21 +54,18 @@ namespace DataLayer
             return zakaznik;
         }
 
-        public Zakaznik FindZak(string jmeno, string prijmeni, string ridicak)
+        public Zakaznik FindZak(string jmeno, string prijmeni)
         {
-            string sql = ("Select * from vis.Zakaznik where");
+            string sql = ("Select * from vis.Zakaznik where jmeno = @jmeno and prijmeni = @prijmeni");
             Zakaznik zakaznik = null;
-            if (jmeno != null && prijmeni != null)
-                sql += " jmeno = \'" + jmeno + "\' and prijmeni = \'" + prijmeni + "\'";
-            else if (ridicak != null && jmeno != null)
-                sql += " and cislo_ridickeho_prukazu = \'" + ridicak + "\'";
-            else
-                sql += " cislo_ridickeho_prukazu = \'" + ridicak + "\'";
+
             using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
             {
                 connection.Open();
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
+                    cmd.Parameters.AddWithValue("@jmeno", jmeno);
+                    cmd.Parameters.AddWithValue("@prijmeni", prijmeni);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -79,7 +77,257 @@ namespace DataLayer
             }
             return zakaznik;
         }
-        
+
+        public Zakaznik FindZak(string jmeno, string prijmeni, string ridicak)
+        {
+            string sql = ("Select * from vis.Zakaznik where jmeno = @jmeno and prijmeni = @prijmeni and cislo_ridicskeho_prukazu = @ridicak");
+            Zakaznik zakaznik = null;
+
+            using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    cmd.Parameters.AddWithValue("@jmeno", jmeno);
+                    cmd.Parameters.AddWithValue("@prijmeni", prijmeni);
+                    cmd.Parameters.AddWithValue("@ridicak", ridicak);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            zakaznik = MapZakToObj(reader);
+                        }
+                    }
+                }
+            }
+            return zakaznik;
+        }
+
+        public Auto FindAuto(string spz)
+        {
+            string sql = ("Select * from vis.Auto where SPZ = @spz");
+            Auto auto = null;
+            using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    cmd.Parameters.AddWithValue("@spz", spz);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            auto = MapAutToObj(reader);
+                        }
+                    }
+                }
+            }
+            return auto;
+        }
+
+        public List<Auto> FindAutaOnRez(int crez)
+        {
+            string sql = ("Select * from vis.auto a JOIN vis.Rezervovano r on r.auto_spz = a.spz where cislo_rezervace = @crez");
+            List<Auto> auta = new List<Auto>();
+            using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    cmd.Parameters.AddWithValue("@crez", crez);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            auta.Add(MapAutToObj(reader));
+                        }
+                    }
+                }
+            }
+            return auta;
+        }
+
+        public List<Rezervace> FindRezZ(int idZak)
+        {
+            string sql = ("Select * from vis.Rezervace where id_zakaznika = @idZak");
+            List < Rezervace> rezervace = new List<Rezervace>();
+            using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    cmd.Parameters.AddWithValue("@idZak", idZak);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            rezervace.Add(MapRezToObj(reader));
+                        }
+                    }
+                }
+            }
+            return rezervace;
+        }
+
+        public List<Rezervace> FindRezZ(string jmeno, string prijmeni)
+        {
+            string sql = ("Select * from vis.Rezervace where jmeno = @jmeno AND prijmeni = @prijmeni");
+            List<Rezervace> rezervace = new List<Rezervace>();
+            using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    cmd.Parameters.AddWithValue("@jmeno", jmeno);
+                    cmd.Parameters.AddWithValue("@prijmeni", prijmeni);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            rezervace.Add(MapRezToObj(reader));
+                        }
+                    }
+                }
+            }
+            return rezervace;
+        }
+
+        public List<Rezervace> FindRezZ(string ridicak)
+        {
+            string sql = ("Select * from vis.Rezervace where cislo_ridicskeho_prukazu = @ridicak");
+            List<Rezervace> rezervace = new List<Rezervace>();
+            using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    cmd.Parameters.AddWithValue("@idZak", ridicak);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            rezervace.Add(MapRezToObj(reader));
+                        }
+                    }
+                }
+            }
+            return rezervace;
+        }
+
+        public List<Rezervace> FindRezR(string spz)
+        {
+            string sql = ("Select r.cislo_rezervace, id_zakaznika, vyzvednuti,vraceni from vis.Rezervace r JOIN vis.Rezervovano re on re.cislo_rezervace = r.cislo_rezervace where auto_spz = @spz");
+            List<Rezervace> rezervace = new List<Rezervace>();
+            using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    cmd.Parameters.AddWithValue("@spz", spz);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            rezervace.Add(MapRezToObj(reader));
+                        }
+                    }
+                }
+            }
+            return rezervace;
+        }
+        public List<Rezervace> FindRezRTyp(string typ)
+        {
+            string sql = ("Select distinct(r.cislo_rezervace), id_zakaznika, vyzvednuti,vraceni from vis.Rezervace r JOIN vis.Rezervovano re on r.cislo_rezervace = re.cislo_rezervace"
+                            +"JOIN vis.auto a on re.auto_spz = a.spz where typ = @typ");
+            List<Rezervace> rezervace = new List<Rezervace>();
+            using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    cmd.Parameters.AddWithValue("@typ", typ);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            rezervace.Add(MapRezToObj(reader));
+                        }
+                    }
+                }
+            }
+            return rezervace;
+        }
+        public List<Rezervace> FindRezRZnacka(string znacka)
+        {
+            string sql = ("Select distinct(r.cislo_rezervace), id_zakaznika, vyzvednuti,vraceni from vis.Rezervace r JOIN vis.Rezervovano re on r.cislo_rezervace = re.cislo_rezervace"
+                            + "JOIN vis.auto a on re.auto_spz = a.spz where znacka = @znacka");
+            List<Rezervace> rezervace = new List<Rezervace>();
+            using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    cmd.Parameters.AddWithValue("@znacka", znacka);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            rezervace.Add(MapRezToObj(reader));
+                        }
+                    }
+                }
+            }
+            return rezervace;
+        }
+
+        public List<Rezervace> FindRezR(string typ, string znacka)
+        {
+            string sql = ("Select distinct(r.cislo_rezervace), id_zakaznika, vyzvednuti,vraceni from vis.Rezervace r JOIN vis.Rezervovano re on r.cislo_rezervace = re.cislo_rezervace"
+                            + "JOIN vis.auto a on re.auto_spz = a.spz where typ = @typ and znacka = @znacka");
+            List<Rezervace> rezervace = new List<Rezervace>();
+            using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    cmd.Parameters.AddWithValue("@typ", typ);
+                    cmd.Parameters.AddWithValue("@znacka", znacka);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            rezervace.Add(MapRezToObj(reader));
+                        }
+                    }
+                }
+            }
+            return rezervace;
+        }
+
+        public List<Auto> FindRezR(DateTime od, DateTime doD)
+        {
+
+            string sql = ("Select * from vis.auto where da = @typ and znacka = @znacka");
+            List<Auto> auta = new List<Auto>();
+            using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    cmd.Parameters.AddWithValue("@od", od);
+                    cmd.Parameters.AddWithValue("@doD", doD);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            auta.Add(MapAutToObj(reader));
+                        }
+                    }
+                }
+            }
+            return auta;
+        }
+
 
         public int SaveZak(Zakaznik zakaznik)
         {
@@ -465,7 +713,7 @@ namespace DataLayer
             platba.id_platby = reader.GetInt32(0);
             platba.cisloFaktury = reader.GetInt32(1);
             platba.typ_platby = reader.GetString(2);
-            platba.castka = reader.GetDouble(3v);
+            platba.castka = reader.GetDouble(3);
             return platba;
         }
 

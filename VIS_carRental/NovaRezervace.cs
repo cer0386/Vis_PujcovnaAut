@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DomainLayer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -34,16 +35,24 @@ namespace VIS_carRental
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //přidání auta
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            //vytvoření rezervace
+            Rezervace rezervace = new Rezervace();
         }
 
         private void listBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //přidání zakoše
 
         }
     }

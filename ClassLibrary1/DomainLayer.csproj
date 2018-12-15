@@ -46,7 +46,7 @@
     <Compile Include="DomainModel\Rezervace.cs" />
     <Compile Include="DomainModel\Upravuje.cs" />
     <Compile Include="DomainModel\Rezervovano.cs" />
-    <Compile Include="Zakaznik.cs" />
+    <Compile Include="DomainModel\Zakaznik.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DomainModel\Zamestnanec.cs" />
   </ItemGroup>
