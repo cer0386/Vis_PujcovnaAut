@@ -124,6 +124,26 @@ namespace DataLayer
             }
             return auto;
         }
+        public List<string> FindAutoTyp()
+        {
+            string sql = ("select distinct(typ) from vis.auto");
+            List<string> typy = new List<string>();
+            using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            typy.Add(reader.GetString(0));
+                        }
+                    }
+                }
+            }
+            return typy;
+        }
 
         public List<Auto> FindAutaOnRez(int crez)
         {
@@ -135,6 +155,28 @@ namespace DataLayer
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
                     cmd.Parameters.AddWithValue("@crez", crez);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            auta.Add(MapAutToObj(reader));
+                        }
+                    }
+                }
+            }
+            return auta;
+        }
+
+        public List<Auto> FindAutaPodleTypu(string typ)
+        {
+            string sql = ("Select * from vis.auto where typ = @typ");
+            List<Auto> auta = new List<Auto>();
+            using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    cmd.Parameters.AddWithValue("@typ", typ);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())

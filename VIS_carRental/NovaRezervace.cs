@@ -1,4 +1,5 @@
-﻿using DomainLayer;
+﻿using DataLayer;
+using DomainLayer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,9 +14,18 @@ namespace VIS_carRental
 {
     public partial class NovaRezervace : Form
     {
+        private DataMapper mapper;
+
         public NovaRezervace()
         {
             InitializeComponent();
+            mapper = new DataMapper();
+            List<string> typy = mapper.FindAutoTyp();
+            foreach(string typ in typy)
+            {
+                typyAut.Items.Add(typ);
+            }
+            
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -54,6 +64,28 @@ namespace VIS_carRental
         {
             //přidání zakoše
 
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string typ = typyAut.Text;
+            List<Auto> auta = mapper.FindAutaPodleTypu(typ);
+
+            foreach(Auto auto in auta)
+            {
+                string text = auto.znacka + " " + auto.typ + " " +auto.SPZ;
+                seznamAut.Items.Add(text);
+            }
         }
     }
 }
