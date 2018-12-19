@@ -1,20 +1,18 @@
-﻿using System;
+﻿using DataLayer;
+using DomainLayer;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace VIS_carRental
 {
     public partial class VyraditAuto : Form
     {
+        private DataMapper mapper;
         public VyraditAuto()
         {
             InitializeComponent();
+            mapper = new DataMapper();
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -23,6 +21,16 @@ namespace VIS_carRental
         }
 
         private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void VyraditAuto_Load(object sender, EventArgs e)
+        {
+            List<Auto> auta = mapper.FindAuta();
+        }
+
+        private void seznamAut_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

@@ -328,5 +328,10 @@ namespace VIS_carRental
 
             
         }
+
+        private void zakInfoR_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

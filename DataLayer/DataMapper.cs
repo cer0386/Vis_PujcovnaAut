@@ -144,6 +144,28 @@ namespace DataLayer
             return typy;
         }
 
+
+        public List<Auto> FindAuta()
+        {
+            string sql = ("Select * from vis.auto");
+            List<Auto> auta = new List<Auto>();
+            using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            auta.Add(MapAutToObj(reader));
+                        }
+                    }
+                }
+            }
+            return auta;
+        }
+
         public List<Auto> FindAutaOnRez(int crez)
         {
             string sql = ("Select * from vis.auto a JOIN vis.Rezervovano r on r.auto_spz = a.spz where cislo_rezervace = @crez");
@@ -348,7 +370,7 @@ namespace DataLayer
         public Faktura FindFak(int cisloR)
         {
             string sql = ("Select * from vis.Faktura where cislo_Rezervace = @cisloR");
-            Faktura auto = null;
+            Faktura faktura = null;
             using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
             {
                 connection.Open();
@@ -359,12 +381,12 @@ namespace DataLayer
                     {
                         while (reader.Read())
                         {
-                            auto = MapFakToObj(reader);
+                            faktura = MapFakToObj(reader);
                         }
                     }
                 }
             }
-            return auto;
+            return faktura;
         }
 
         public Platba FindPlat(int cisloR)
@@ -390,18 +412,25 @@ namespace DataLayer
         }
 
 
-        public List<Auto> FindAuta(string od, string doD)
+        public List<Auto> FindAuta(string od, string doD, string typ)
         {
 
-            string sql = ("Select * from vis.auto where BETWEEN '1996-07-01' AND '1996-07-31';");
+            string sql = ("select * from vis.auto where spz in( select auto_spz from vis.rezervovano"+
+                           " where cislo_rezervace  in(select cislo_rezervace from vis.rezervace"+
+                       " except select cislo_rezervace from vis.rezervace "+
+                           "where \'"+od+"\' <= vraceni AND \'"+doD+"\' >= vraceni)) ");
+
+            if(typ != null || typ != "")
+            {
+                sql += "AND typ = \'" + typ+"\'";
+            }
             List<Auto> auta = new List<Auto>();
             using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
             {
                 connection.Open();
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
-                    cmd.Parameters.AddWithValue("@od", od);
-                    cmd.Parameters.AddWithValue("@doD", doD);
+
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -412,6 +441,54 @@ namespace DataLayer
                 }
             }
             return auta;
+        }
+
+        public int FindPocetRez()
+        {
+
+            string sql = ("select count(Cislo_Rezervace) from vis.rezervace");
+
+            int pocet = 0;
+            using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            pocet = reader.GetInt32(0);
+                        }
+                    }
+                }
+            }
+            return pocet;
+        }
+
+        public int FindPocetFak()
+        {
+
+            string sql = ("select count(Cislo_Faktury) from vis.faktura");
+
+            int pocet = 0;
+            using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            pocet = reader.GetInt32(0);
+                        }
+                    }
+                }
+            }
+            return pocet;
         }
 
 
@@ -556,8 +633,11 @@ namespace DataLayer
                 StringBuilder sb = new StringBuilder();
                 sb.Clear();
                 sb.Append("INSERT INTO vis.faktura (cislo_faktury,cislo_rezervace,vytvoreno,potvrzeno, zaplaceno)");
-                sb.Append("VALUES (@cisloF, @cisloR, @vytvoreno, @potvrzeno, @zaplaceno);");
-                //sb.Append("SELECT CAST(scope_identity() AS int)");
+                DateTime nope = new DateTime(0001, 01, 01, 0, 0, 0);
+                if (faktura.zaplacena != nope )
+                    sb.Append("VALUES (@cisloF, @cisloR, @vytvoreno, @potvrzeno, @zaplaceno);");
+                else
+                    sb.Append("VALUES (@cisloF, @cisloR, @vytvoreno, @potvrzeno, null);");
                 string sql = sb.ToString();
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -565,7 +645,9 @@ namespace DataLayer
                     command.Parameters.AddWithValue("@cisloR", faktura.cisloRezervace);
                     command.Parameters.AddWithValue("@vytvoreno", faktura.vytvorena);
                     command.Parameters.AddWithValue("@potvrzeno", faktura.potvrzena);
-                    command.Parameters.AddWithValue("@zaplaceno", faktura.zaplacena);
+                    if (faktura.zaplacena != nope)
+                        command.Parameters.AddWithValue("@zaplaceno", faktura.zaplacena);
+                    command.ExecuteNonQuery();
                 }
             }
 
@@ -650,6 +732,7 @@ namespace DataLayer
                     command.Parameters.AddWithValue("@idZ", rezervace.idZakaznika);
                     command.Parameters.AddWithValue("@vyzvednuti", rezervace.zacatekRezervace);
                     command.Parameters.AddWithValue("@vraceni", rezervace.konecRezervace);
+                    command.ExecuteNonQuery();
                 }
             }
 
@@ -669,6 +752,7 @@ namespace DataLayer
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     command.Parameters.AddWithValue("@id", rezervace.cisloRezervace);
+                    command.ExecuteNonQuery();
 
                 }
             }
@@ -690,6 +774,7 @@ namespace DataLayer
                 {
                     command.Parameters.AddWithValue("@cisloR", rezervovano.cisloRezervace);
                     command.Parameters.AddWithValue("@spz", rezervovano.SPZ);
+                    command.ExecuteNonQuery();
                 }
             }
 
@@ -709,6 +794,7 @@ namespace DataLayer
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     command.Parameters.AddWithValue("@spz", rezervovano.SPZ);
+                    command.ExecuteNonQuery();
 
                 }
             }

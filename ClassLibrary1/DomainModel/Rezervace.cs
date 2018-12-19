@@ -16,6 +16,10 @@ namespace DomainLayer
         public List<Auto> auta { get; set; }
 
 
+        public Rezervace()
+        {
+            auta = new List<Auto>();
+        }
 
         private void vystavFakturu()
         {
