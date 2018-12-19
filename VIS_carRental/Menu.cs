@@ -14,19 +14,22 @@ namespace VIS_carRental
 {
     public partial class Menu : Form
     {
+        private DataMapper mapper;
+        private int cisloR;
         public Menu()
         {
             InitializeComponent();
+            mapper = new DataMapper();
         }
 
         private void Menu_Load(object sender, EventArgs e)
         {
-            DataMapper mapper = new DataMapper();
+            mapper = new DataMapper();
             List<Zakaznik> zakazniks = new List<Zakaznik>();
             zakazniks = mapper.FindZak();
             foreach(Zakaznik zak in zakazniks)
             {
-                listZaks.Items.Add(zak.Jmeno + " " + zak.Prijmeni);
+                listZaks.Items.Add(zak.ID +" " +zak.Jmeno + " " + zak.Prijmeni);
             }
 
 
@@ -154,11 +157,12 @@ namespace VIS_carRental
         {
             string zak = listZaks.SelectedItem.ToString();
             string[] jp = zak.Split(' ');
-            string jmeno = jp[0];
-            string prijmeni = jp[1];
+            int id = Int32.Parse(jp[0]);
+            string jmeno = jp[1];
+            string prijmeni = jp[2];
 
-            DataMapper mapper = new DataMapper();
-            Zakaznik zakaznik = mapper.FindZak(jmeno, prijmeni);
+
+            Zakaznik zakaznik = mapper.FindZak(id);
 
 
             List<Rezervace> rezervaces = new List<Rezervace>();
@@ -195,11 +199,15 @@ namespace VIS_carRental
             string prijmeni = prijmeniText.Text;
             string ridicak = ridicakText.Text;
 
-            DataMapper mapper = new DataMapper();
-            Zakaznik zakaznik = mapper.FindZak(jmeno, prijmeni);
+            List<Zakaznik> zakaznici = mapper.FindZak(jmeno, prijmeni);
+            listZaks.Items.Clear();
+            foreach (Zakaznik zak in zakaznici)
+            {
+                listZaks.Items.Add(zak.ID + " " + zak.Jmeno + " " + zak.Prijmeni);
+            }
 
 
-            List<Rezervace> rezervaces = new List<Rezervace>();
+           /* List<Rezervace> rezervaces = new List<Rezervace>();
             rezervaces = mapper.FindRezZ(zakaznik.ID);
 
             BindingSource binding = new BindingSource();
@@ -211,14 +219,14 @@ namespace VIS_carRental
             {
                 object value = descriptor.GetValue(zakaznik);
                 infoOZak.Items.Add(value);
-            }*/
+            }
             infoOZak.Items.Clear();
             infoOZak.Items.Add("ID zákazníka - "+ zakaznik.ID);
             infoOZak.Items.Add("Jméno a Příjmení - "+ zakaznik.Jmeno +" " +zakaznik.Prijmeni);
             infoOZak.Items.Add("Adresa - " + zakaznik.Mesto + " "+zakaznik.Ulice+" "+zakaznik.CisloPopisne);
             infoOZak.Items.Add("PSČ - " + zakaznik.PSC);
             infoOZak.Items.Add("Email - " + zakaznik.Email);
-            infoOZak.Items.Add("Číslo řidičského průkazu - " + zakaznik.cisloRidicskehoPrukazu);
+            infoOZak.Items.Add("Číslo řidičského průkazu - " + zakaznik.cisloRidicskehoPrukazu);*/
 
             /*zakInfoR.Rows.Add("Číslo rezervace", "Od", "Do");
             foreach( Rezervace rezervace in rezervaces)
@@ -234,9 +242,9 @@ namespace VIS_carRental
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = this.zakInfoR.Rows[e.RowIndex];
-                int cisloR = Int32.Parse(row.Cells["cisloRezervace"].Value.ToString());
+                cisloR = Int32.Parse(row.Cells["cisloRezervace"].Value.ToString());
 
-                DataMapper mapper = new DataMapper();
+                //mapper = new DataMapper();
                 List<Auto> auta = new List<Auto>();
 
                 auta = mapper.FindAutaOnRez(cisloR);
@@ -244,7 +252,7 @@ namespace VIS_carRental
                 BindingSource binding = new BindingSource();
                 binding.DataSource = auta;
 
-                autaNaRez.DataSource = binding;
+                dataNaRez.DataSource = binding;
             }
 
         }
@@ -277,6 +285,48 @@ namespace VIS_carRental
         private void textBox9_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void autaNaRez_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string typ = vypsatDetail.Text;
+            BindingSource binding = new BindingSource();
+
+            switch (typ)
+            {
+                case ("Auta"):
+                    List<Auto> auta = new List<Auto>();
+
+
+                    auta = mapper.FindAutaOnRez(cisloR);
+
+                    
+                    binding.DataSource = auta;
+
+                    dataNaRez.DataSource = binding;
+                    break;
+                case ("Faktura"):
+                    Faktura faktura = mapper.FindFak(cisloR);
+                    binding.DataSource = faktura;
+
+                    dataNaRez.DataSource = binding;
+                    break;
+
+                case ("Platba"):
+                    Platba platba = mapper.FindPlat(cisloR);
+                    binding.DataSource = platba;
+
+                    dataNaRez.DataSource = binding;
+                    break;
+            }
+            
+
+            
         }
     }
 }

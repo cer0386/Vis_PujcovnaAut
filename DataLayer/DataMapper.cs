@@ -34,7 +34,7 @@ namespace DataLayer
 
         public Zakaznik FindZak(int id)
         {
-            string sql = ("Select * from vis.Zakaznik where id = @id");
+            string sql = ("Select * from vis.Zakaznik where id_zakaznika = @id");
             Zakaznik zakaznik = null;
             using(SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
             {
@@ -54,23 +54,23 @@ namespace DataLayer
             return zakaznik;
         }
 
-        public Zakaznik FindZak(string jmeno, string prijmeni)
+        public List<Zakaznik> FindZak(string jmeno, string prijmeni)
         {
-            string sql = ("Select * from vis.Zakaznik where jmeno = @jmeno and prijmeni = @prijmeni");
-            Zakaznik zakaznik = null;
+            string sql = ("Select * from vis.Zakaznik where jmeno = \'"+jmeno+ "\' and prijmeni = \'" + prijmeni + "\'");
+            List<Zakaznik> zakaznik = new List<Zakaznik>();
 
             using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
             {
                 connection.Open();
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
-                    cmd.Parameters.AddWithValue("@jmeno", jmeno);
-                    cmd.Parameters.AddWithValue("@prijmeni", prijmeni);
+                    //cmd.Parameters.AddWithValue("@jmeno", jmeno);
+                    //cmd.Parameters.AddWithValue("@prijmeni", prijmeni);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            zakaznik = MapZakToObj(reader);
+                            zakaznik .Add( MapZakToObj(reader));
                         }
                     }
                 }
@@ -78,9 +78,9 @@ namespace DataLayer
             return zakaznik;
         }
 
-        public Zakaznik FindZak(string jmeno, string prijmeni, string ridicak)
+        public Zakaznik FindZak(string ridicak)
         {
-            string sql = ("Select * from vis.Zakaznik where jmeno = @jmeno and prijmeni = @prijmeni and cislo_ridicskeho_prukazu = @ridicak");
+            string sql = ("Select * from vis.Zakaznik where cislo_ridickeho_prukazu = @ridicak");
             Zakaznik zakaznik = null;
 
             using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
@@ -88,8 +88,7 @@ namespace DataLayer
                 connection.Open();
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
-                    cmd.Parameters.AddWithValue("@jmeno", jmeno);
-                    cmd.Parameters.AddWithValue("@prijmeni", prijmeni);
+
                     cmd.Parameters.AddWithValue("@ridicak", ridicak);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -346,10 +345,55 @@ namespace DataLayer
             return rezervace;
         }
 
-        public List<Auto> FindRezR(DateTime od, DateTime doD)
+        public Faktura FindFak(int cisloR)
+        {
+            string sql = ("Select * from vis.Faktura where cislo_Rezervace = @cisloR");
+            Faktura auto = null;
+            using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    cmd.Parameters.AddWithValue("@cisloR", cisloR);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            auto = MapFakToObj(reader);
+                        }
+                    }
+                }
+            }
+            return auto;
+        }
+
+        public Platba FindPlat(int cisloR)
+        {
+            string sql = ("Select id_platba, p.cislo_faktury,typ_platby, castka from vis.Platba p JOIN vis.faktura f on f.cislo_faktury = p.cislo_faktury where f.cislo_rezervace = @cisloR");
+            Platba platba = null;
+            using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    cmd.Parameters.AddWithValue("@cisloR", cisloR);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            platba = MapPlaToObj(reader);
+                        }
+                    }
+                }
+            }
+            return platba;
+        }
+
+
+        public List<Auto> FindAuta(string od, string doD)
         {
 
-            string sql = ("Select * from vis.auto where da = @typ and znacka = @znacka");
+            string sql = ("Select * from vis.auto where BETWEEN '1996-07-01' AND '1996-07-31';");
             List<Auto> auta = new List<Auto>();
             using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
             {
@@ -744,8 +788,10 @@ namespace DataLayer
             faktura.cisloFaktury = reader.GetInt32(0);
             faktura.cisloRezervace = reader.GetInt32(1);
             faktura.vytvorena = reader.GetDateTime(2);
-            faktura.potvrzena = reader.GetDateTime(3);
-            faktura.zaplacena = reader.GetDateTime(4);
+            if (reader["Potvrzeno"] != DBNull.Value)
+                faktura.potvrzena = reader.GetDateTime(3);
+            if (reader["Zaplaceno"] != DBNull.Value)
+                faktura.zaplacena = reader.GetDateTime(4);
             return faktura;
         }
 
@@ -755,7 +801,7 @@ namespace DataLayer
             platba.id_platby = reader.GetInt32(0);
             platba.cisloFaktury = reader.GetInt32(1);
             platba.typ_platby = reader.GetString(2);
-            platba.castka = reader.GetDouble(3);
+            platba.castka = reader.GetInt32(3);
             return platba;
         }
 

@@ -25,7 +25,14 @@ namespace VIS_carRental
             {
                 typyAut.Items.Add(typ);
             }
-            
+
+            List<Zakaznik> zakazniks = new List<Zakaznik>();
+            zakazniks = mapper.FindZak();
+            foreach (Zakaznik zak in zakazniks)
+            {
+                seznamZak.Items.Add(zak.Jmeno + " " + zak.Prijmeni);
+            }
+
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -86,6 +93,49 @@ namespace VIS_carRental
                 string text = auto.znacka + " " + auto.typ + " " +auto.SPZ;
                 seznamAut.Items.Add(text);
             }
+        }
+
+        private void vyhledatZak_Click(object sender, EventArgs e)
+        {
+            string jmeno = jmenoText.Text;
+            string prijmeni = prijmeniText.Text;
+            string ridicak = ridicakText.Text;
+            List<Zakaznik> zakaznici = new List<Zakaznik>();
+            Zakaznik zakaznik = null;
+            seznamZak.Items.Clear();
+
+            if (ridicak == null || ridicak == "")
+            {
+                zakaznici = mapper.FindZak(jmeno, prijmeni);
+                foreach(Zakaznik zak in zakaznici)
+                {
+                    seznamZak.Items.Add(zak.Jmeno + " " + zak.Prijmeni + " " + zak.cisloRidicskehoPrukazu);
+                }
+
+            }
+            else
+            {
+                zakaznik = mapper.FindZak(ridicak);
+                seznamZak.Items.Add(zakaznik.Jmeno + " " + zakaznik.Prijmeni + " " + zakaznik.cisloRidicskehoPrukazu);
+            }
+
+            if((jmeno == null || jmeno == "")&& (prijmeni == null || prijmeni == "")&& (ridicak == null || ridicak == ""))
+            {
+                zakaznici = mapper.FindZak();
+                foreach (Zakaznik zak in zakaznici)
+                {
+                    seznamZak.Items.Add(zak.Jmeno + " " + zak.Prijmeni + " " + zak.cisloRidicskehoPrukazu);
+                }
+            }
+            
+            
+
+        }
+
+        private void pridejPocetAD_Click(object sender, EventArgs e)
+        {
+            string dOd = autaOd.Value.ToString("yyyy-MM-dd");
+            string dDo = autaDo.Value.ToString("yyyy-MM-dd");
         }
     }
 }
