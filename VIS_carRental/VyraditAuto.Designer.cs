@@ -34,6 +34,10 @@
             this.stkJN = new System.Windows.Forms.CheckBox();
             this.button7 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.seznamAut = new System.Windows.Forms.ListBox();
+            this.seznamNahrAut = new System.Windows.Forms.ListBox();
+            this.najitNahradni = new System.Windows.Forms.Button();
+            this.nahradit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -65,13 +69,12 @@
             // 
             // stkJN
             // 
-            this.stkJN.AutoSize = true;
             this.stkJN.Location = new System.Drawing.Point(16, 46);
             this.stkJN.Margin = new System.Windows.Forms.Padding(2);
             this.stkJN.Name = "stkJN";
-            this.stkJN.Size = new System.Drawing.Size(80, 17);
+            this.stkJN.Size = new System.Drawing.Size(97, 17);
             this.stkJN.TabIndex = 54;
-            this.stkJN.Text = "Platné STK";
+            this.stkJN.Text = "Neplatné STK";
             this.stkJN.UseVisualStyleBackColor = true;
             this.stkJN.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
@@ -95,17 +98,61 @@
             this.label2.TabIndex = 57;
             this.label2.Text = "Seznam náhradních aut";
             // 
+            // seznamAut
+            // 
+            this.seznamAut.FormattingEnabled = true;
+            this.seznamAut.Location = new System.Drawing.Point(200, 24);
+            this.seznamAut.Margin = new System.Windows.Forms.Padding(2);
+            this.seznamAut.Name = "seznamAut";
+            this.seznamAut.Size = new System.Drawing.Size(197, 251);
+            this.seznamAut.TabIndex = 30;
+            this.seznamAut.SelectedIndexChanged += new System.EventHandler(this.seznamAut_SelectedIndexChanged);
+            // 
+            // seznamNahrAut
+            // 
+            this.seznamNahrAut.FormattingEnabled = true;
+            this.seznamNahrAut.Location = new System.Drawing.Point(420, 24);
+            this.seznamNahrAut.Margin = new System.Windows.Forms.Padding(2);
+            this.seznamNahrAut.Name = "seznamNahrAut";
+            this.seznamNahrAut.Size = new System.Drawing.Size(192, 251);
+            this.seznamNahrAut.TabIndex = 56;
+            // 
+            // najitNahradni
+            // 
+            this.najitNahradni.Location = new System.Drawing.Point(200, 279);
+            this.najitNahradni.Margin = new System.Windows.Forms.Padding(2, 2, 2, 1);
+            this.najitNahradni.Name = "najitNahradni";
+            this.najitNahradni.Size = new System.Drawing.Size(166, 26);
+            this.najitNahradni.TabIndex = 58;
+            this.najitNahradni.Text = "Najít náhradní";
+            this.najitNahradni.UseVisualStyleBackColor = true;
+            this.najitNahradni.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // nahradit
+            // 
+            this.nahradit.Location = new System.Drawing.Point(420, 279);
+            this.nahradit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 1);
+            this.nahradit.Name = "nahradit";
+            this.nahradit.Size = new System.Drawing.Size(166, 26);
+            this.nahradit.TabIndex = 59;
+            this.nahradit.Text = "Nahradit";
+            this.nahradit.UseVisualStyleBackColor = true;
+            // 
             // VyraditAuto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1031, 525);
+            this.ClientSize = new System.Drawing.Size(623, 347);
+            this.Controls.Add(this.nahradit);
+            this.Controls.Add(this.najitNahradni);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.seznamNahrAut);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.stkJN);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.spzText);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.seznamAut);
             this.Name = "VyraditAuto";
             this.Text = "VyraditAuto";
             this.Load += new System.EventHandler(this.VyraditAuto_Load);
@@ -121,5 +168,9 @@
         private System.Windows.Forms.CheckBox stkJN;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ListBox seznamAut;
+        private System.Windows.Forms.ListBox seznamNahrAut;
+        private System.Windows.Forms.Button najitNahradni;
+        private System.Windows.Forms.Button nahradit;
     }
 }

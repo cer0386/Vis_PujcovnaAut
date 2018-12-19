@@ -123,6 +123,32 @@ namespace DataLayer
             }
             return auto;
         }
+
+
+        public List<Auto> FindAuta(double cena)
+        {
+
+            string sql = ("select * from vis.auto where cena_za_den between "+(cena-200)+" and "+(cena +300));
+            List<Auto> auta = new List<Auto>();
+            using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            auta.Add(MapAutToObj(reader));
+                        }
+                    }
+                }
+            }
+            return auta;
+        }
+
+
+
         public List<string> FindAutoTyp()
         {
             string sql = ("select distinct(typ) from vis.auto");
@@ -142,6 +168,29 @@ namespace DataLayer
                 }
             }
             return typy;
+        }
+
+        public List<Auto> FindAuta(DateTime stk)
+        {
+            string date = stk.ToString("yyyy-MM-dd");
+            string sql = ("select * from vis.auto where stk <=@stk");
+            List<Auto> auta = new List<Auto>();
+            using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    cmd.Parameters.AddWithValue("@stk", date);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            auta.Add(MapAutToObj(reader));
+                        }
+                    }
+                }
+            }
+            return auta;
         }
 
 
