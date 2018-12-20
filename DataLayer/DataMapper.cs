@@ -128,7 +128,30 @@ namespace DataLayer
         public List<Auto> FindAuta(double cena)
         {
 
-            string sql = ("select * from vis.auto where cena_za_den between "+(cena-200)+" and "+(cena +300));
+            string sql = ("select * from vis.auto where cena_za_den between "+(cena-200)+" and "+(cena +300) +" and vyrazeno =0");
+            List<Auto> auta = new List<Auto>();
+            using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            auta.Add(MapAutToObj(reader));
+                        }
+                    }
+                }
+            }
+            return auta;
+        }
+
+
+        public List<Auto> FindAuta(double cena, string dnes)
+        {
+
+            string sql = ("select * from vis.auto where cena_za_den between " + (cena - 200) + " and " + (cena + 300) + " and vyrazeno =0");
             List<Auto> auta = new List<Auto>();
             using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
             {
@@ -235,6 +258,29 @@ namespace DataLayer
                 }
             }
             return auta;
+        }
+        public int FindAutoSAktualniRez(string spz, string vraceni)
+        {
+            string sql = ("select count(re.cislo_rezervace) from vis.rezervace re"+
+                " Join vis.rezervovano r on r.cislo_rezervace = re.cislo_rezervace AND r.auto_spz = \'" + spz + "\' " +
+                    "where \'"+vraceni+"\' <= vraceni ");
+            int auto = -1;
+            using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            auto = reader.GetInt32(0);
+                        }
+                    }
+                }
+            }
+            return auto;
         }
 
         public List<Auto> FindAutaPodleTypu(string typ)
@@ -464,10 +510,10 @@ namespace DataLayer
         public List<Auto> FindAuta(string od, string doD, string typ)
         {
 
-            string sql = ("select * from vis.auto where spz in( select auto_spz from vis.rezervovano"+
-                           " where cislo_rezervace  in(select cislo_rezervace from vis.rezervace"+
+            string sql = ("select * from vis.auto where spz not in( select auto_spz from vis.rezervovano"+
+                           " where cislo_rezervace not in(select cislo_rezervace from vis.rezervace"+
                        " except select cislo_rezervace from vis.rezervace "+
-                           "where \'"+od+"\' <= vraceni AND \'"+doD+"\' >= vraceni)) ");
+                           "where \'"+od+"\' <= vraceni AND \'"+doD+"\' >= vyzvednuti)) AND vyrazeno = 0 ");
 
             if(typ != null || typ != "")
             {
@@ -890,6 +936,28 @@ namespace DataLayer
             return 0;
         }
 
+        /*public int UpdateAuto(Auto auto)
+        {
+            SqlConnectionStringBuilder builder = DBConnector.GetBuilder();
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+            {
+                connection.Open();
+                StringBuilder sb = new StringBuilder();
+                sb.Clear();
+                sb.Append("INSERT INTO vis.upravuje (ID_zamestnance,Cislo_Rezervace,)");
+                sb.Append("VALUES (@idZam, @cisloR);");
+
+                string sql = sb.ToString();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@idZam", upravuje.IDzamestnance);
+                    command.Parameters.AddWithValue("@cisloR", upravuje.cisloRezervace);
+                }
+            }
+            return 0;
+        }*/
+
+
         private static Zakaznik MapZakToObj(SqlDataReader reader)
         {
             Zakaznik zakaznik = new Zakaznik();
@@ -981,8 +1049,5 @@ namespace DataLayer
             upravuje.cisloRezervace = reader.GetInt32(1);
             return upravuje;
         }
-
-
-
     }
 }

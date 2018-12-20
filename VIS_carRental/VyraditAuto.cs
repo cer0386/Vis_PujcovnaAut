@@ -11,11 +11,13 @@ namespace VIS_carRental
         private DataMapper mapper;
         private bool stk;
         private string spz;
-        private Auto autoKnahrazeni;
+        private Auto autoKVyrazeni;
+        string dnes;
         public VyraditAuto()
         {
             InitializeComponent();
             mapper = new DataMapper();
+            dnes = DateTime.Now.ToString("yyyy-MM-dd");
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -75,19 +77,37 @@ namespace VIS_carRental
         }
 
         //Přidat aby to filtrovalo jen ty auta, co jsou nebo budou na rezervaci
+        private void vyberAuta()
+        {
+            string item = seznamAut.GetItemText(seznamAut.SelectedItem);
+            string[] podItem = item.Split(' ');
+            string spz = podItem[2];
+            autoKVyrazeni = mapper.FindAuto(spz);
+        }
+            
+        //najít náhradní auta
         private void button1_Click(object sender, EventArgs e)
         {
+            seznamNahrAut.Items.Clear();
+            
+
+
+
             List<Auto> autaNahrazena = new List<Auto>();
+
+
             if (seznamAut.SelectedIndex == -1)
                 MessageBox.Show("Nebylo vybráno žádné auto!");
             else
             {
-                string item = seznamAut.GetItemText(seznamAut.SelectedItem);
-                string[] podItem = item.Split(' ');
-                string spz = podItem[2];
-                autoKnahrazeni = mapper.FindAuto(spz);
-                
-                autaNahrazena = mapper.FindAuta(autoKnahrazeni.cenaZaDen);
+                vyberAuta();
+                //mám auto co chci vyřadit
+                //zjistit jestli je nebo bude na rezerevaci
+                //když ne, tak vyřadit
+
+                //když jo, tak vyhodit hlášku
+
+                autaNahrazena = mapper.FindAuta(autoKVyrazeni.cenaZaDen);
 
                 foreach (Auto a in autaNahrazena)
                 {
@@ -97,5 +117,26 @@ namespace VIS_carRental
 
 
         }
+        //vyřadit
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            vyberAuta();
+            if (autoKVyrazeni == null)
+            {
+                MessageBox.Show("Vyber Auto!");
+            }
+            else if (mapper.FindAutoSAktualniRez(autoKVyrazeni.SPZ, dnes)>0)
+            {
+                MessageBox.Show("Auto je na rezervaci");
+            }
+            else
+            {
+                //možme vyřadit
+                MessageBox.Show("Auto není na rezervaci");
+                
+            }
+
+        }
+
     }
 }

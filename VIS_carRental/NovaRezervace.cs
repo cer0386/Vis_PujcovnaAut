@@ -210,9 +210,9 @@ namespace VIS_carRental
             seznamAut.Items.Clear();
             auta = mapper.FindAuta(dOd, dDo, typ);
 
-            foreach(Auto auto in auta)
+            foreach(Auto a in auta)
             {
-                seznamAut.Items.Add(auto.znacka + " " + auto.typ + " " + auto.SPZ);
+                seznamAut.Items.Add(a.znacka + " " + a.typ + " " + a.SPZ);
             }
 
         }

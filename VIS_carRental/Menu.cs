@@ -15,17 +15,19 @@ namespace VIS_carRental
     public partial class Menu : Form
     {
         private DataMapper mapper;
+        List<Zakaznik> zakazniks;
         private int cisloR;
         public Menu()
         {
             InitializeComponent();
             mapper = new DataMapper();
+            zakazniks = new List<Zakaznik>();
         }
 
         private void Menu_Load(object sender, EventArgs e)
         {
             mapper = new DataMapper();
-            List<Zakaznik> zakazniks = new List<Zakaznik>();
+            zakazniks = new List<Zakaznik>();
             zakazniks = mapper.FindZak();
             foreach(Zakaznik zak in zakazniks)
             {
@@ -201,6 +203,13 @@ namespace VIS_carRental
 
             List<Zakaznik> zakaznici = mapper.FindZak(jmeno, prijmeni);
             listZaks.Items.Clear();
+            if(jmeno == "" && prijmeni == "" && ridicak== "")
+            {
+                foreach (Zakaznik zak in zakazniks)
+                {
+                    listZaks.Items.Add(zak.ID + " " + zak.Jmeno + " " + zak.Prijmeni);
+                }
+            }
             foreach (Zakaznik zak in zakaznici)
             {
                 listZaks.Items.Add(zak.ID + " " + zak.Jmeno + " " + zak.Prijmeni);
