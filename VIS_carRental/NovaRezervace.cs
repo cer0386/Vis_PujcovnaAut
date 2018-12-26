@@ -208,7 +208,7 @@ namespace VIS_carRental
 
             List<Auto> auta = new List<Auto>();
             seznamAut.Items.Clear();
-            auta = mapper.FindAuta(dOd, dDo, typ);
+            auta = mapper.FindDostupneAuta(dOd, dDo, typ);
 
             foreach(Auto a in auta)
             {

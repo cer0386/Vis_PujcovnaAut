@@ -106,8 +106,8 @@ namespace VIS_carRental
                 //když ne, tak vyřadit
 
                 //když jo, tak vyhodit hlášku
-
-                autaNahrazena = mapper.FindAuta(autoKVyrazeni.cenaZaDen);
+                string dnes1 = DateTime.Now.AddYears(1).ToString("yyyy-MM-dd");
+                autaNahrazena = mapper.FindDostupneAuta(dnes, dnes1, autoKVyrazeni.cenaZaDen);
 
                 foreach (Auto a in autaNahrazena)
                 {
@@ -125,18 +125,33 @@ namespace VIS_carRental
             {
                 MessageBox.Show("Vyber Auto!");
             }
-            else if (mapper.FindAutoSAktualniRez(autoKVyrazeni.SPZ, dnes)>0)
+            else if (mapper.FindPocetAktualniRez(autoKVyrazeni.SPZ, dnes)>0)
             {
                 MessageBox.Show("Auto je na rezervaci");
             }
             else
             {
                 //možme vyřadit
-                MessageBox.Show("Auto není na rezervaci");
+                int status = mapper.UpdateAutoVyrad(autoKVyrazeni);
+                if(status == -1 || status == 0)
+                {
+                    MessageBox.Show("Došlo k chybě");
+                }
+                else
+                {
+                    MessageBox.Show("Úspěšně vyřazeno");
+                    vypisVsechnyAuta();
+                }
+                
                 
             }
 
         }
 
+        private void nahradit_Click(object sender, EventArgs e)
+        {
+            //nahradit auto na rezervaci
+
+        }
     }
 }

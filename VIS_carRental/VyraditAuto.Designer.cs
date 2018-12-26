@@ -44,36 +44,36 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(263, 11);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(197, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 17);
+            this.label1.Size = new System.Drawing.Size(63, 13);
             this.label1.TabIndex = 31;
             this.label1.Text = "Seznam aut";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 14);
+            this.label4.Location = new System.Drawing.Point(13, 11);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 17);
+            this.label4.Size = new System.Drawing.Size(28, 13);
             this.label4.TabIndex = 41;
             this.label4.Text = "SPZ";
             // 
             // spzText
             // 
-            this.spzText.Location = new System.Drawing.Point(71, 14);
-            this.spzText.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.spzText.Location = new System.Drawing.Point(53, 11);
+            this.spzText.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.spzText.Name = "spzText";
-            this.spzText.Size = new System.Drawing.Size(175, 22);
+            this.spzText.Size = new System.Drawing.Size(132, 20);
             this.spzText.TabIndex = 40;
             // 
             // stkJN
             // 
-            this.stkJN.Location = new System.Drawing.Point(21, 57);
-            this.stkJN.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.stkJN.Location = new System.Drawing.Point(16, 46);
+            this.stkJN.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.stkJN.Name = "stkJN";
-            this.stkJN.Size = new System.Drawing.Size(129, 21);
+            this.stkJN.Size = new System.Drawing.Size(97, 17);
             this.stkJN.TabIndex = 54;
             this.stkJN.Text = "Neplatné STK";
             this.stkJN.UseVisualStyleBackColor = true;
@@ -81,10 +81,10 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(25, 82);
-            this.button7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+            this.button7.Location = new System.Drawing.Point(19, 67);
+            this.button7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 1);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(221, 32);
+            this.button7.Size = new System.Drawing.Size(166, 26);
             this.button7.TabIndex = 55;
             this.button7.Text = "Vyhledat";
             this.button7.UseVisualStyleBackColor = true;
@@ -93,40 +93,37 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(556, 11);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(417, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(158, 17);
+            this.label2.Size = new System.Drawing.Size(121, 13);
             this.label2.TabIndex = 57;
             this.label2.Text = "Seznam náhradních aut";
             // 
             // seznamAut
             // 
             this.seznamAut.FormattingEnabled = true;
-            this.seznamAut.ItemHeight = 16;
-            this.seznamAut.Location = new System.Drawing.Point(267, 30);
-            this.seznamAut.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.seznamAut.Location = new System.Drawing.Point(200, 24);
+            this.seznamAut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.seznamAut.Name = "seznamAut";
-            this.seznamAut.Size = new System.Drawing.Size(261, 308);
+            this.seznamAut.Size = new System.Drawing.Size(197, 251);
             this.seznamAut.TabIndex = 30;
             this.seznamAut.SelectedIndexChanged += new System.EventHandler(this.seznamAut_SelectedIndexChanged);
             // 
             // seznamNahrAut
             // 
             this.seznamNahrAut.FormattingEnabled = true;
-            this.seznamNahrAut.ItemHeight = 16;
-            this.seznamNahrAut.Location = new System.Drawing.Point(560, 30);
-            this.seznamNahrAut.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.seznamNahrAut.Location = new System.Drawing.Point(420, 24);
+            this.seznamNahrAut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.seznamNahrAut.Name = "seznamNahrAut";
-            this.seznamNahrAut.Size = new System.Drawing.Size(255, 308);
+            this.seznamNahrAut.Size = new System.Drawing.Size(192, 251);
             this.seznamNahrAut.TabIndex = 56;
             // 
             // najitNahradni
             // 
-            this.najitNahradni.Location = new System.Drawing.Point(424, 343);
-            this.najitNahradni.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+            this.najitNahradni.Location = new System.Drawing.Point(318, 279);
+            this.najitNahradni.Margin = new System.Windows.Forms.Padding(2, 2, 2, 1);
             this.najitNahradni.Name = "najitNahradni";
-            this.najitNahradni.Size = new System.Drawing.Size(104, 32);
+            this.najitNahradni.Size = new System.Drawing.Size(78, 26);
             this.najitNahradni.TabIndex = 58;
             this.najitNahradni.Text = "Najít náhradní";
             this.najitNahradni.UseVisualStyleBackColor = true;
@@ -134,20 +131,21 @@
             // 
             // nahradit
             // 
-            this.nahradit.Location = new System.Drawing.Point(560, 343);
-            this.nahradit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+            this.nahradit.Location = new System.Drawing.Point(420, 279);
+            this.nahradit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 1);
             this.nahradit.Name = "nahradit";
-            this.nahradit.Size = new System.Drawing.Size(116, 32);
+            this.nahradit.Size = new System.Drawing.Size(87, 26);
             this.nahradit.TabIndex = 59;
             this.nahradit.Text = "Nahradit";
             this.nahradit.UseVisualStyleBackColor = true;
+            this.nahradit.Click += new System.EventHandler(this.nahradit_Click);
             // 
             // vyraditA
             // 
-            this.vyraditA.Location = new System.Drawing.Point(267, 343);
-            this.vyraditA.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+            this.vyraditA.Location = new System.Drawing.Point(200, 279);
+            this.vyraditA.Margin = new System.Windows.Forms.Padding(2, 2, 2, 1);
             this.vyraditA.Name = "vyraditA";
-            this.vyraditA.Size = new System.Drawing.Size(104, 32);
+            this.vyraditA.Size = new System.Drawing.Size(78, 26);
             this.vyraditA.TabIndex = 61;
             this.vyraditA.Text = "Vyřadit";
             this.vyraditA.UseVisualStyleBackColor = true;
@@ -155,9 +153,9 @@
             // 
             // VyraditAuto
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(831, 427);
+            this.ClientSize = new System.Drawing.Size(623, 347);
             this.Controls.Add(this.vyraditA);
             this.Controls.Add(this.nahradit);
             this.Controls.Add(this.najitNahradni);
@@ -169,7 +167,6 @@
             this.Controls.Add(this.spzText);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.seznamAut);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "VyraditAuto";
             this.Text = "VyraditAuto";
             this.Load += new System.EventHandler(this.VyraditAuto_Load);

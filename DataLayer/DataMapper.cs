@@ -219,7 +219,7 @@ namespace DataLayer
 
         public List<Auto> FindAuta()
         {
-            string sql = ("Select * from vis.auto");
+            string sql = ("Select * from vis.auto where vyrazeno = 0");
             List<Auto> auta = new List<Auto>();
             using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
             {
@@ -259,7 +259,7 @@ namespace DataLayer
             }
             return auta;
         }
-        public int FindAutoSAktualniRez(string spz, string vraceni)
+        public int FindPocetAktualniRez(string spz, string vraceni)
         {
             string sql = ("select count(re.cislo_rezervace) from vis.rezervace re"+
                 " Join vis.rezervovano r on r.cislo_rezervace = re.cislo_rezervace AND r.auto_spz = \'" + spz + "\' " +
@@ -462,6 +462,29 @@ namespace DataLayer
             return rezervace;
         }
 
+        public List<Rezervace> FindNoveRezOdAuta(string spz, string datum)
+        {
+            string sql = ("select * from vis.rezervace r "+
+                            "JOIN vis.rezervovano re on re.cislo_rezervace = r.cislo_rezervace where auto_spz = \'"+spz+"\' and vyzvednuti >= \'"+datum+"\'");
+            List<Rezervace> rezervace = new List<Rezervace>();
+            using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            rezervace.Add(MapRezToObj(reader));
+                        }
+                    }
+                }
+            }
+            return rezervace;
+        }
+
         public Faktura FindFak(int cisloR)
         {
             string sql = ("Select * from vis.Faktura where cislo_Rezervace = @cisloR");
@@ -507,7 +530,7 @@ namespace DataLayer
         }
 
 
-        public List<Auto> FindAuta(string od, string doD, string typ)
+        public List<Auto> FindDostupneAuta(string od, string doD, string typ)
         {
 
             string sql = ("select * from vis.auto where spz not in( select auto_spz from vis.rezervovano"+
@@ -519,6 +542,34 @@ namespace DataLayer
             {
                 sql += "AND typ = \'" + typ+"\'";
             }
+            List<Auto> auta = new List<Auto>();
+            using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            auta.Add(MapAutToObj(reader));
+                        }
+                    }
+                }
+            }
+            return auta;
+        }
+
+        public List<Auto> FindDostupneAuta(string od, string doD, double cena)
+        {
+
+            string sql = ("select * from vis.auto where spz not in( select auto_spz from vis.rezervovano" +
+                           " where cislo_rezervace not in(select cislo_rezervace from vis.rezervace" +
+                       " except select cislo_rezervace from vis.rezervace " +
+                           "where \'" + od + "\' <= vraceni AND \'" + doD + "\' >= vyzvednuti)) and cena_za_den between " + (cena - 200) + " and " + (cena + 300) + " and vyrazeno =0");
+
+
             List<Auto> auta = new List<Auto>();
             using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
             {
@@ -722,6 +773,7 @@ namespace DataLayer
         public int SaveFak(Faktura faktura)
         {
             SqlConnectionStringBuilder builder = DBConnector.GetBuilder();
+            int status = -1;
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
             {
                 connection.Open();
@@ -742,12 +794,12 @@ namespace DataLayer
                     command.Parameters.AddWithValue("@potvrzeno", faktura.potvrzena);
                     if (faktura.zaplacena != nope)
                         command.Parameters.AddWithValue("@zaplaceno", faktura.zaplacena);
-                    command.ExecuteNonQuery();
+                    status = command.ExecuteNonQuery();
                 }
             }
 
 
-            return 0;
+            return status;
         }
         public int DeleteFak(Faktura faktura)
         {
@@ -812,6 +864,7 @@ namespace DataLayer
         public int SaveRez(Rezervace rezervace)
         {
             SqlConnectionStringBuilder builder = DBConnector.GetBuilder();
+            int status = -1;
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
             {
                 connection.Open();
@@ -827,16 +880,17 @@ namespace DataLayer
                     command.Parameters.AddWithValue("@idZ", rezervace.idZakaznika);
                     command.Parameters.AddWithValue("@vyzvednuti", rezervace.zacatekRezervace);
                     command.Parameters.AddWithValue("@vraceni", rezervace.konecRezervace);
-                    command.ExecuteNonQuery();
+                    status = command.ExecuteNonQuery();
                 }
             }
 
 
-            return 0;
+            return status;
         }
         public int DeleteRez(Rezervace rezervace)
         {
             SqlConnectionStringBuilder builder = DBConnector.GetBuilder();
+            int status = -1;
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
             {
                 connection.Open();
@@ -847,15 +901,16 @@ namespace DataLayer
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     command.Parameters.AddWithValue("@id", rezervace.cisloRezervace);
-                    command.ExecuteNonQuery();
+                    status = command.ExecuteNonQuery();
 
                 }
             }
-            return 0;
+            return status;
         }
         public int SaveRezervovano(Rezervovano rezervovano)
         {
             SqlConnectionStringBuilder builder = DBConnector.GetBuilder();
+            int status = -1;
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
             {
                 connection.Open();
@@ -869,16 +924,17 @@ namespace DataLayer
                 {
                     command.Parameters.AddWithValue("@cisloR", rezervovano.cisloRezervace);
                     command.Parameters.AddWithValue("@spz", rezervovano.SPZ);
-                    command.ExecuteNonQuery();
+                    status = command.ExecuteNonQuery();
                 }
             }
 
 
-            return 0;
+            return status;
         }
         public int DeleteRezervovano(Rezervovano rezervovano)
         {
             SqlConnectionStringBuilder builder = DBConnector.GetBuilder();
+            int status = -1;
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
             {
                 connection.Open();
@@ -889,11 +945,11 @@ namespace DataLayer
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     command.Parameters.AddWithValue("@spz", rezervovano.SPZ);
-                    command.ExecuteNonQuery();
+                    status = command.ExecuteNonQuery();
 
                 }
             }
-            return 0;
+            return status;
         }
         public int SaveUprav(Upravuje upravuje)
         {
@@ -936,26 +992,22 @@ namespace DataLayer
             return 0;
         }
 
-        /*public int UpdateAuto(Auto auto)
+        public int UpdateAutoVyrad(Auto auto)
         {
             SqlConnectionStringBuilder builder = DBConnector.GetBuilder();
+            int status = -1;
+            string sql = "update vis.auto set vyrazeno = 1 where spz = \'"+auto.SPZ+"\'";
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
             {
                 connection.Open();
-                StringBuilder sb = new StringBuilder();
-                sb.Clear();
-                sb.Append("INSERT INTO vis.upravuje (ID_zamestnance,Cislo_Rezervace,)");
-                sb.Append("VALUES (@idZam, @cisloR);");
-
-                string sql = sb.ToString();
+                
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
-                    command.Parameters.AddWithValue("@idZam", upravuje.IDzamestnance);
-                    command.Parameters.AddWithValue("@cisloR", upravuje.cisloRezervace);
+                    status = command.ExecuteNonQuery();
                 }
             }
-            return 0;
-        }*/
+            return status;
+        }
 
 
         private static Zakaznik MapZakToObj(SqlDataReader reader)
