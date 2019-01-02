@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainLayer", "ClassLibrary
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\DataLayer.csproj", "{EBC5A2A7-0F30-415B-91BD-47A136B0F0C8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vis_web", "Vis_web\Vis_web.csproj", "{52A52E8B-0BA0-46F0-875A-0BF6DC63A8D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{EBC5A2A7-0F30-415B-91BD-47A136B0F0C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBC5A2A7-0F30-415B-91BD-47A136B0F0C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBC5A2A7-0F30-415B-91BD-47A136B0F0C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52A52E8B-0BA0-46F0-875A-0BF6DC63A8D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52A52E8B-0BA0-46F0-875A-0BF6DC63A8D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52A52E8B-0BA0-46F0-875A-0BF6DC63A8D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52A52E8B-0BA0-46F0-875A-0BF6DC63A8D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
