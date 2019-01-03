@@ -8,18 +8,32 @@ namespace Vis_web.Controllers
 {
     public class MenuController : Controller
     {
-        // GET: Menu
+        
         public ActionResult Index()
         {
             return View();
         }
 
-        // 
-        // GET: /Menu/Welcome/ 
-
-        public string Welcome()
+        public ActionResult Auta()
         {
-            return "This is the Welcome action method...";
+            return View();
         }
+
+        public ActionResult Rezervace()
+        {
+            return View();
+        }
+
+
+        public ActionResult Zakaznici()
+        {
+            return View( );
+        }
+
+        public ActionResult Zamestnanci()
+        {
+            return View();
+        }
+
     }
 }

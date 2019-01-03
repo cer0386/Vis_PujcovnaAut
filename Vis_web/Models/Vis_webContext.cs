@@ -20,7 +20,7 @@ namespace Vis_web.Models
         {
         }
 
-        public System.Data.Entity.DbSet<DomainLayer.Zakaznik> Zakazniks { get; set; }
+        
     }
 
 

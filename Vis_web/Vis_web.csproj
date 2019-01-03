@@ -185,6 +185,10 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Menu\Auta.cshtml" />
+    <Content Include="Views\Menu\Zamestnanci.cshtml" />
+    <Content Include="Views\Menu\Rezervace.cshtml" />
+    <Content Include="Views\Menu\Zakaznici.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
