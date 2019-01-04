@@ -69,15 +69,15 @@ namespace VIS_carRental
                 string[] podItem = item.Split(' ');
                 string spz = podItem[2];
                 Auto auto = mapper.FindAuto(spz);
-                bool je = false;
+                bool jeNaRez = false;
                 if (pAut > rezervace.auta.Count)
                 {
                     foreach (Auto a in rezervace.auta)
                     {
                         if (auto.SPZ == a.SPZ)
-                            je = true;
+                            jeNaRez = true;
                     }
-                    if (!je)
+                    if (!jeNaRez)
                     {
                         rezervace.auta.Add(auto);
                         rekapRez.Items.Add(auto.SPZ + " " + auto.znacka + " " + auto.typ);
@@ -154,12 +154,7 @@ namespace VIS_carRental
         {
             typ = typyAut.Text;
             List<Auto> auta = mapper.FindAutaPodleTypu(typ);
-            /*
-            foreach(Auto auto in auta)
-            {
-                string text = auto.znacka + " " + auto.typ + " " +auto.SPZ;
-                seznamAut.Items.Add(text);
-            }*/
+
         }
 
         private void vyhledatZak_Click(object sender, EventArgs e)
@@ -257,6 +252,11 @@ namespace VIS_carRental
                 rekapRez.Items.Remove(rekapRez.SelectedItem);
                 
             }
+        }
+
+        private void seznamAut_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

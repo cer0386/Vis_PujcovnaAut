@@ -77,6 +77,7 @@ namespace Vis_web
             {
                 f +=  faktura.zaplacena;
             }
+            
 
             
             string p = "Rezervace nebyla zaplacena";

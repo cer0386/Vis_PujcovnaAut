@@ -82,15 +82,16 @@
             // 
             this.seznamAut.FormattingEnabled = true;
             this.seznamAut.Location = new System.Drawing.Point(201, 10);
-            this.seznamAut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.seznamAut.Margin = new System.Windows.Forms.Padding(2);
             this.seznamAut.Name = "seznamAut";
             this.seznamAut.Size = new System.Drawing.Size(198, 108);
             this.seznamAut.TabIndex = 20;
+            this.seznamAut.SelectedIndexChanged += new System.EventHandler(this.seznamAut_SelectedIndexChanged);
             // 
             // pridejAuto
             // 
             this.pridejAuto.Location = new System.Drawing.Point(201, 120);
-            this.pridejAuto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pridejAuto.Margin = new System.Windows.Forms.Padding(2);
             this.pridejAuto.Name = "pridejAuto";
             this.pridejAuto.Size = new System.Drawing.Size(56, 19);
             this.pridejAuto.TabIndex = 21;
@@ -102,7 +103,7 @@
             // 
             this.seznamZak.FormattingEnabled = true;
             this.seznamZak.Location = new System.Drawing.Point(201, 153);
-            this.seznamZak.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.seznamZak.Margin = new System.Windows.Forms.Padding(2);
             this.seznamZak.Name = "seznamZak";
             this.seznamZak.Size = new System.Drawing.Size(198, 108);
             this.seznamZak.TabIndex = 22;
@@ -110,7 +111,7 @@
             // pridejZak
             // 
             this.pridejZak.Location = new System.Drawing.Point(201, 265);
-            this.pridejZak.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pridejZak.Margin = new System.Windows.Forms.Padding(2);
             this.pridejZak.Name = "pridejZak";
             this.pridejZak.Size = new System.Drawing.Size(56, 19);
             this.pridejZak.TabIndex = 23;
@@ -121,7 +122,7 @@
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(405, 282);
-            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(137, 25);
             this.button3.TabIndex = 26;
@@ -154,7 +155,7 @@
             // 
             this.rekapRez.FormattingEnabled = true;
             this.rekapRez.Location = new System.Drawing.Point(405, 23);
-            this.rekapRez.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rekapRez.Margin = new System.Windows.Forms.Padding(2);
             this.rekapRez.Name = "rekapRez";
             this.rekapRez.Size = new System.Drawing.Size(155, 238);
             this.rekapRez.TabIndex = 29;
@@ -163,7 +164,7 @@
             // autaOd
             // 
             this.autaOd.Location = new System.Drawing.Point(11, 57);
-            this.autaOd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.autaOd.Margin = new System.Windows.Forms.Padding(2);
             this.autaOd.Name = "autaOd";
             this.autaOd.Size = new System.Drawing.Size(151, 20);
             this.autaOd.TabIndex = 30;
@@ -171,7 +172,7 @@
             // autaDo
             // 
             this.autaDo.Location = new System.Drawing.Point(11, 93);
-            this.autaDo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.autaDo.Margin = new System.Windows.Forms.Padding(2);
             this.autaDo.Name = "autaDo";
             this.autaDo.Size = new System.Drawing.Size(151, 20);
             this.autaDo.TabIndex = 31;
@@ -189,7 +190,7 @@
             // ridicakText
             // 
             this.ridicakText.Location = new System.Drawing.Point(9, 261);
-            this.ridicakText.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ridicakText.Margin = new System.Windows.Forms.Padding(2);
             this.ridicakText.Name = "ridicakText";
             this.ridicakText.Size = new System.Drawing.Size(168, 20);
             this.ridicakText.TabIndex = 67;
@@ -217,7 +218,7 @@
             // prijmeniText
             // 
             this.prijmeniText.Location = new System.Drawing.Point(57, 222);
-            this.prijmeniText.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.prijmeniText.Margin = new System.Windows.Forms.Padding(2);
             this.prijmeniText.Name = "prijmeniText";
             this.prijmeniText.Size = new System.Drawing.Size(120, 20);
             this.prijmeniText.TabIndex = 64;
@@ -225,7 +226,7 @@
             // jmenoText
             // 
             this.jmenoText.Location = new System.Drawing.Point(57, 199);
-            this.jmenoText.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.jmenoText.Margin = new System.Windows.Forms.Padding(2);
             this.jmenoText.Name = "jmenoText";
             this.jmenoText.Size = new System.Drawing.Size(120, 20);
             this.jmenoText.TabIndex = 63;
@@ -246,7 +247,7 @@
             this.typyAut.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.typyAut.FormattingEnabled = true;
             this.typyAut.Location = new System.Drawing.Point(70, 120);
-            this.typyAut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.typyAut.Margin = new System.Windows.Forms.Padding(2);
             this.typyAut.Name = "typyAut";
             this.typyAut.Size = new System.Drawing.Size(92, 21);
             this.typyAut.TabIndex = 71;
@@ -255,7 +256,7 @@
             // buttonHledatData
             // 
             this.buttonHledatData.Location = new System.Drawing.Point(70, 153);
-            this.buttonHledatData.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonHledatData.Margin = new System.Windows.Forms.Padding(2);
             this.buttonHledatData.Name = "buttonHledatData";
             this.buttonHledatData.Size = new System.Drawing.Size(86, 19);
             this.buttonHledatData.TabIndex = 72;
@@ -266,7 +267,7 @@
             // vyhledatZak
             // 
             this.vyhledatZak.Location = new System.Drawing.Point(57, 282);
-            this.vyhledatZak.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.vyhledatZak.Margin = new System.Windows.Forms.Padding(2);
             this.vyhledatZak.Name = "vyhledatZak";
             this.vyhledatZak.Size = new System.Drawing.Size(119, 19);
             this.vyhledatZak.TabIndex = 73;
@@ -277,7 +278,7 @@
             // buttonPocetAut
             // 
             this.buttonPocetAut.Location = new System.Drawing.Point(71, 20);
-            this.buttonPocetAut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonPocetAut.Margin = new System.Windows.Forms.Padding(2);
             this.buttonPocetAut.Name = "buttonPocetAut";
             this.buttonPocetAut.Size = new System.Drawing.Size(56, 19);
             this.buttonPocetAut.TabIndex = 74;
@@ -345,7 +346,7 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "NovaRezervace";
             this.Text = "NovaRezervace";
             ((System.ComponentModel.ISupportInitialize)(this.pocetAut)).EndInit();

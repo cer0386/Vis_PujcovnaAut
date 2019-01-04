@@ -16,7 +16,12 @@ namespace DomainLayer
 
         public Boolean isManager()
         {
-            return true;
+            if(Pozice == "Prodejce")
+            {
+                return false;
+            }
+            else
+                return true;
         }
         public void vytvorZakaznika()
         {
@@ -30,11 +35,7 @@ namespace DomainLayer
         {
 
         }
-        public Rezervace getRezervace()
-        {
-            Rezervace r = new Rezervace();
-            return r;
-        }
+
 
 
 

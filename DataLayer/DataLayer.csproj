@@ -46,7 +46,6 @@
     <Compile Include="DBConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\ClassLibrary1\DomainLayer.csproj">
       <Project>{8f83d0b9-426a-42fe-9b87-ce0b176e1149}</Project>

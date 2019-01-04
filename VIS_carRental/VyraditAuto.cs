@@ -1,5 +1,6 @@
 ﻿using DataLayer;
 using DomainLayer;
+using DomainLayer.DomainModel;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -77,6 +78,7 @@ namespace VIS_carRental
         }
 
         //Přidat aby to filtrovalo jen ty auta, co jsou nebo budou na rezervaci
+        //na vybrani auta z listboxu
         private void vyberAuta()
         {
             string item = seznamAut.GetItemText(seznamAut.SelectedItem);
@@ -89,10 +91,6 @@ namespace VIS_carRental
         private void button1_Click(object sender, EventArgs e)
         {
             seznamNahrAut.Items.Clear();
-            
-
-
-
             List<Auto> autaNahrazena = new List<Auto>();
 
 
@@ -104,10 +102,10 @@ namespace VIS_carRental
                 //mám auto co chci vyřadit
                 //zjistit jestli je nebo bude na rezerevaci
                 //když ne, tak vyřadit
-
                 //když jo, tak vyhodit hlášku
+
                 string dnes1 = DateTime.Now.AddYears(1).ToString("yyyy-MM-dd");
-                autaNahrazena = mapper.FindDostupneAuta(dnes, dnes1, autoKVyrazeni.cenaZaDen);
+                autaNahrazena = mapper.FindDostupneAuta(dnes, dnes1, autoKVyrazeni.cenaZaDen, autoKVyrazeni.SPZ);
 
                 foreach (Auto a in autaNahrazena)
                 {
@@ -120,6 +118,7 @@ namespace VIS_carRental
         //vyřadit
         private void button1_Click_1(object sender, EventArgs e)
         {
+
             vyberAuta();
             if (autoKVyrazeni == null)
             {
@@ -141,6 +140,9 @@ namespace VIS_carRental
                 {
                     MessageBox.Show("Úspěšně vyřazeno");
                     vypisVsechnyAuta();
+                    VyrazeneAutoJ a = new VyrazeneAutoJ(autoKVyrazeni.SPZ, autoKVyrazeni.STK, autoKVyrazeni.pocetNehod, DateTime.Now);
+                    VyrazeneAutoJ a1 = new VyrazeneAutoJ();
+                    a1.zapis(a);
                 }
                 
                 
@@ -148,10 +150,27 @@ namespace VIS_carRental
 
         }
 
+
         private void nahradit_Click(object sender, EventArgs e)
         {
             //nahradit auto na rezervaci
+            List<Rezervace> rezKNahrazeni = mapper.FindAktualniRez(autoKVyrazeni.SPZ, dnes);
 
+            string item = seznamNahrAut.GetItemText(seznamNahrAut.SelectedItem);
+            string[] podItem = item.Split(' ');
+            string spz = podItem[2];
+            Auto autoKNahrazeni = mapper.FindAuto(spz);
+            int status = -1;
+            foreach(Rezervace rez in rezKNahrazeni)
+            {
+                status = mapper.UpdateAutoNahrad(autoKNahrazeni.SPZ, autoKVyrazeni.SPZ, rez.cisloRezervace);
+            }
+        }
+
+        private void btnLog_Click(object sender, EventArgs e)
+        {
+            LogVyrazenychAut logVyrazenychAut = new LogVyrazenychAut();
+            logVyrazenychAut.Show();
         }
     }
 }

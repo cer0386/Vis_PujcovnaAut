@@ -39,6 +39,7 @@
             this.najitNahradni = new System.Windows.Forms.Button();
             this.nahradit = new System.Windows.Forms.Button();
             this.vyraditA = new System.Windows.Forms.Button();
+            this.btnLog = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -63,7 +64,7 @@
             // spzText
             // 
             this.spzText.Location = new System.Drawing.Point(53, 11);
-            this.spzText.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.spzText.Margin = new System.Windows.Forms.Padding(2);
             this.spzText.Name = "spzText";
             this.spzText.Size = new System.Drawing.Size(132, 20);
             this.spzText.TabIndex = 40;
@@ -71,7 +72,7 @@
             // stkJN
             // 
             this.stkJN.Location = new System.Drawing.Point(16, 46);
-            this.stkJN.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.stkJN.Margin = new System.Windows.Forms.Padding(2);
             this.stkJN.Name = "stkJN";
             this.stkJN.Size = new System.Drawing.Size(97, 17);
             this.stkJN.TabIndex = 54;
@@ -103,7 +104,7 @@
             // 
             this.seznamAut.FormattingEnabled = true;
             this.seznamAut.Location = new System.Drawing.Point(200, 24);
-            this.seznamAut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.seznamAut.Margin = new System.Windows.Forms.Padding(2);
             this.seznamAut.Name = "seznamAut";
             this.seznamAut.Size = new System.Drawing.Size(197, 251);
             this.seznamAut.TabIndex = 30;
@@ -113,7 +114,7 @@
             // 
             this.seznamNahrAut.FormattingEnabled = true;
             this.seznamNahrAut.Location = new System.Drawing.Point(420, 24);
-            this.seznamNahrAut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.seznamNahrAut.Margin = new System.Windows.Forms.Padding(2);
             this.seznamNahrAut.Name = "seznamNahrAut";
             this.seznamNahrAut.Size = new System.Drawing.Size(192, 251);
             this.seznamNahrAut.TabIndex = 56;
@@ -151,11 +152,22 @@
             this.vyraditA.UseVisualStyleBackColor = true;
             this.vyraditA.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // btnLog
+            // 
+            this.btnLog.Location = new System.Drawing.Point(19, 252);
+            this.btnLog.Name = "btnLog";
+            this.btnLog.Size = new System.Drawing.Size(166, 53);
+            this.btnLog.TabIndex = 62;
+            this.btnLog.Text = "Zobrazit log vyřazených aut";
+            this.btnLog.UseVisualStyleBackColor = true;
+            this.btnLog.Click += new System.EventHandler(this.btnLog_Click);
+            // 
             // VyraditAuto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(623, 347);
+            this.Controls.Add(this.btnLog);
             this.Controls.Add(this.vyraditA);
             this.Controls.Add(this.nahradit);
             this.Controls.Add(this.najitNahradni);
@@ -187,5 +199,6 @@
         private System.Windows.Forms.Button najitNahradni;
         private System.Windows.Forms.Button nahradit;
         private System.Windows.Forms.Button vyraditA;
+        private System.Windows.Forms.Button btnLog;
     }
 }

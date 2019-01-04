@@ -259,11 +259,11 @@ namespace DataLayer
             }
             return auta;
         }
-        public int FindPocetAktualniRez(string spz, string vraceni)
+        public int FindPocetAktualniRez(string spz, string dnes)
         {
             string sql = ("select count(re.cislo_rezervace) from vis.rezervace re"+
                 " Join vis.rezervovano r on r.cislo_rezervace = re.cislo_rezervace AND r.auto_spz = \'" + spz + "\' " +
-                    "where \'"+vraceni+"\' <= vraceni ");
+                    "where \'"+ dnes + "\' <= vraceni ");
             int auto = -1;
             using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
             {
@@ -281,6 +281,30 @@ namespace DataLayer
                 }
             }
             return auto;
+        }
+
+        public List<Rezervace> FindAktualniRez(string spz, string dnes)
+        {
+            string sql = ("select * from vis.rezervace re" +
+                " Join vis.rezervovano r on r.cislo_rezervace = re.cislo_rezervace AND r.auto_spz = \'" + spz + "\' " +
+                    "AND vyzvednuti >= \'" + dnes + "\'");
+            List<Rezervace> rezervace = new List<Rezervace>();
+            using (SqlConnection connection = new SqlConnection(DBConnector.GetBuilder().ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            rezervace.Add(MapRezToObj(reader));
+                        }
+                    }
+                }
+            }
+            return rezervace;
         }
 
         public List<Auto> FindAutaPodleTypu(string typ)
@@ -561,13 +585,13 @@ namespace DataLayer
             return auta;
         }
 
-        public List<Auto> FindDostupneAuta(string od, string doD, double cena)
+        public List<Auto> FindDostupneAuta(string od, string doD, double cena,string spz)
         {
 
             string sql = ("select * from vis.auto where spz not in( select auto_spz from vis.rezervovano" +
                            " where cislo_rezervace not in(select cislo_rezervace from vis.rezervace" +
                        " except select cislo_rezervace from vis.rezervace " +
-                           "where \'" + od + "\' <= vraceni AND \'" + doD + "\' >= vyzvednuti)) and cena_za_den between " + (cena - 200) + " and " + (cena + 300) + " and vyrazeno =0");
+                           "where \'" + od + "\' <= vraceni AND \'" + doD + "\' >= vyzvednuti)) and cena_za_den between " + (cena - 200) + " and " + (cena + 300) + " and spz!= " + spz + " and vyrazeno =0");
 
 
             List<Auto> auta = new List<Auto>();
@@ -1001,6 +1025,23 @@ namespace DataLayer
             {
                 connection.Open();
                 
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    status = command.ExecuteNonQuery();
+                }
+            }
+            return status;
+        }
+
+        public int UpdateAutoNahrad(string spzNahrazeni, string spzVyrazene, int cisloR)
+        {
+            SqlConnectionStringBuilder builder = DBConnector.GetBuilder();
+            int status = -1;
+            string sql = "update vis.rezervovano set auto_spz = \'" + spzNahrazeni + "\' where auto_spz = \'" + spzVyrazene + "\' and cislo_rezervace = " + cisloR;
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+            {
+                connection.Open();
+
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     status = command.ExecuteNonQuery();

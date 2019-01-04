@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DomainLayer
 {
     public class Auto
     {
+        
         public String SPZ { get; set; }
         public String znacka { get; set; }
         public String typ { get; set; }
@@ -17,13 +14,16 @@ namespace DomainLayer
         public double cenaZaDen { get; set; }
         public bool vyrazeno { get; set; }
 
-        public Boolean jeRezervovano()
-        {
-            return true;
-        }
-        public void vyradAuto()
-        {
 
+        public bool platneSTK()
+        {
+            if (STK < DateTime.Now)
+                return false;
+            else
+                return true;
+            
         }
+
+
     }
 }
